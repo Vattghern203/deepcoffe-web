@@ -1,17 +1,24 @@
 import './App.css'
 
-import News from '@/components/templates/News'
+import Navbar from "@/components/templates/NavBar/NavBar"
+
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+
+import { Home, News } from '@/pages'
 
 function App() {
   
 
   return (
     <>
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/news' element={<News />} />
+        </Routes>
+      </Router>
       <main>
-        <News.Root heading='Lorem Ipsum'>
-          <News.Article />
-          <News.Article  />
-        </News.Root>
       </main>
     </>
   )

@@ -1,0 +1,8 @@
+a {
+    &:hover > svg {
+        --transformation-value: 4%;
+        backface-visibility: hidden;
+        transform: translateX(var(--transformation-value));
+        transition: transform ease .2s;
+    }
+}
