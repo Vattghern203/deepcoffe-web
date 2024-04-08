@@ -11,12 +11,12 @@ export default function Component() {
         <section
             className="flex items-center justify-center w-full min-h-[600px]"
         >
-            <label className="w-full max-w-3xl p-4 border-2 border-dashed rounded-l flex flex-col items-center justify-center gap-2 border-gray-300 dark:border-gray-800" htmlFor="file-form">
+            <label className="w-full max-w-3xl p-4 border-2 border-dashed rounded-l flex flex-col items-center justify-center gap-2 border-gray-300 dark:border-gray-800 cursor-pointer" htmlFor="file-form">
                 <span className="h-20 flex items-center gap-2 text-2xl font-semibold">
                     <FileIcon className="w-6 h-6" />
                     <span className="font-bold">Drag and drop your files here</span>
                 </span>
-                <label className="text-center text-sm text-gray-500 dark:text-gray-400 hover:cursor-pointer" htmlFor="file-form">
+                <label className="text-center text-sm text-gray-500 dark:text-gray-400" htmlFor="file-form">
                     or
                     <Button className="ml-2 -z-10" size="sm" onClick={() => document.getElementById('file-form')?.click()}>Choose a file to upload
 
