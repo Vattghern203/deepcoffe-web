@@ -13,7 +13,7 @@ import './upload-files.module.css'
 export default function Component() {
 
     const [fileStack, setFileStack] = useState<File[]>([])
-    const [blobs, setBlobs] = useState<Blob[]>([])
+    //const [blobs, setBlobs] = useState<Blob[]>([])
 
     const dropHandler = (event: DragEvent) => {
 
@@ -92,11 +92,6 @@ export default function Component() {
                     <input className="hidden" type="file" name="" id="file-form" />
                 </label>
             </label>
-
-
-            <div className="doidona" onDrop={(ev) => dropHandler(ev)} onDragOver={(ev) => dragOverHandler(ev)}>
-              ARRASTA AQUI
-            </div>
         </section>
     )
 }

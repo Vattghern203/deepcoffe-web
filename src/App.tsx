@@ -8,7 +8,7 @@ import { Home, News } from '@/pages'
 
 function App() {
 
-  const pageLinks = [
+  /* const pageLinks = [
     {
       name: 'home',
       url: '/'
@@ -28,7 +28,7 @@ function App() {
       name: 'sobre',
       url: '/about'
     }
-  ]
+  ] */
 
   return (
     <>
