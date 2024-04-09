@@ -1,6 +1,6 @@
 import './App.css'
 
-import { NavigationBar, linkListProps } from '@/components/organisms/NavigationBar/NavigationBart'
+import Nav from '@/components/organisms/Nav/Nav'
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
@@ -33,7 +33,7 @@ function App() {
   return (
     <>
       <Router>
-        <NavigationBar links={pageLinks}/>
+        <Nav />
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/news' element={<News />} />

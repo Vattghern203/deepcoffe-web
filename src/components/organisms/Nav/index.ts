@@ -1,11 +1,11 @@
 import { NavRoot } from "./NavRoot"
 import { NavLink } from "./NavLink"
-import { NavLogo } from "./NavLogo"
+//import { NavLogo } from "./NavLogo"
 
 const Nav = {
   Root: NavRoot,
   Link: NavLink,
-  Logo: NavLogo
+  //Logo: NavLogo
 }
 
 export default Nav

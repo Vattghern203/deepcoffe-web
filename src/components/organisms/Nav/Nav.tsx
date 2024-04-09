@@ -3,6 +3,9 @@
  * @see https://v0.dev/t/sKPaDhtD5w6
  * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
  */
+
+import './header.module.css'
+
 import { Link } from "react-router-dom"
 
 export default function Component() {
