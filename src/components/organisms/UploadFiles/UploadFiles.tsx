@@ -122,11 +122,6 @@ export default function Component() {
                     <input className="hidden" type="file" name="" id="file-form" />
                 </label>
             </label>
-
-
-
-
-
         </section>
 
         <section className="flex">
@@ -136,7 +131,11 @@ export default function Component() {
 
         {namedBlobs.length !== 0 &&
 
-        <UploadFilesConfirmation src={namedBlobs[0]} />
+        <UploadFilesConfirmation
+          src={namedBlobs[0]}
+          onCancelAction={() => namedBlobs.pop()}
+          onConfirmAction={() => window.alert("Ok OK OK")}
+        />
 
       }
       </>

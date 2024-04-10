@@ -5,10 +5,12 @@ import { Button } from "@/components/ui/button"
 import { ImageThumb } from "@/components/molecules/"
 
 interface props {
-  src: string
+  src: string,
+  onCancelAction: () => void,
+  onConfirmAction: () => void
 }
 
-export default function UploadFilesConfirmation({ src }:props) {
+export default function UploadFilesConfirmation({ src, onCancelAction, onConfirmAction }:props) {
 
   return (
 
@@ -25,8 +27,8 @@ export default function UploadFilesConfirmation({ src }:props) {
 
 
         <section className="inline-flex justify-center w-full gap-4">
-          <Button variant={"outline"}>Cancel</Button>
-          <Button>Ok</Button>
+          <Button variant={"outline"} onClick={onCancelAction}>Cancel</Button>
+          <Button onClick={onConfirmAction}>Ok</Button>
         </section>
       </DialogContent>
     </Dialog>

@@ -13,7 +13,7 @@ export default function Component() {
     <header className="fixed inset-x-0 top-0 z-50">
       <section className="px-4 md:px-6">
         <div className="flex h-14 items-center">
-          <Link className="mr-6" to="#">
+          <Link className="mr-6" to="/">
             <img
               alt="Logo"
               className="h-6 w-6 rounded-full"
