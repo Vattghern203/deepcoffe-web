@@ -5,6 +5,10 @@
  */
 import { DragEvent, useState } from "react";
 
+import { ImageThumb } from "@/components/molecules";
+
+import UploadFilesConfirmation from "./Dialog"
+
 import { FileIcon } from "@radix-ui/react-icons"
 import { Button } from "@/components/ui/button"
 
@@ -13,7 +17,6 @@ import './upload-files.module.css'
 export default function Component() {
 
     const [fileStack, setFileStack] = useState<File[]>([])
-    //const [blobs, setBlobs] = useState<Blob[]>([])
 
     const dropHandler = (event: DragEvent) => {
 
@@ -56,7 +59,6 @@ export default function Component() {
 
       const blobHref = URL.createObjectURL(file)
 
-
       const blobImg = document.createElement('img')
 
       blobImg.src = blobHref
@@ -64,10 +66,38 @@ export default function Component() {
       document.body.appendChild(blobImg)
     }
 
-    fileStack.forEach((item) => createBlob(item))
+    const createNamedBlobs = (file: File) => {
 
+      const namedBlob = URL.createObjectURL(file)
+
+      console.log(namedBlob)
+
+      return namedBlob
+    }
+
+    const convertBlobToBase64 = (blob: Blob) => {
+
+      const reader = new FileReader()
+
+      reader.readAsDataURL(blob)
+      reader.onloadend = () => {
+
+        console.log(reader.result)
+
+        return reader.result
+      }
+    }
+
+    const namedBlobs = fileStack.map((item) => createNamedBlobs(item))
+    //fileStack.forEach((item) => convertBlobToBase64(item))
+
+    console.log(namedBlobs)
+
+    console.log(fileStack)
 
     return (
+
+      <>
 
         <section
             className="flex items-center justify-center w-full min-h-[600px]"
@@ -92,6 +122,23 @@ export default function Component() {
                     <input className="hidden" type="file" name="" id="file-form" />
                 </label>
             </label>
+
+
+
+
+
         </section>
+
+        <section className="flex">
+
+        {namedBlobs.map(elem => <ImageThumb src={elem} altText="hello" key={elem} />)}
+        </section>
+
+        {namedBlobs.length !== 0 &&
+
+        <UploadFilesConfirmation src={namedBlobs[0]} />
+
+      }
+      </>
     )
 }

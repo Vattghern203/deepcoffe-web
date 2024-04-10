@@ -1,0 +1,1 @@
+export { default as ImageThumb } from "./ImageThumb/ImageThumb"
