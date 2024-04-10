@@ -13,131 +13,153 @@ import { FileIcon } from "@radix-ui/react-icons"
 import { Button } from "@/components/ui/button"
 
 import './upload-files.module.css'
+import { json } from "stream/consumers";
 
 export default function Component() {
 
-    const [fileStack, setFileStack] = useState<File[]>([])
+  const [fileStack, setFileStack] = useState<File[]>([])
 
-    const dropHandler = (event: DragEvent) => {
+  const dropHandler = (event: DragEvent) => {
 
-      console.log("File(s) dropped");
+    console.log("File(s) dropped");
 
-      event?.preventDefault()
+    event?.preventDefault()
 
-      if (event.dataTransfer && event.dataTransfer.items) {
+    if (event.dataTransfer && event.dataTransfer.items) {
 
-        [...event.dataTransfer.items].forEach((item: DataTransferItem, i) => {
+      [...event.dataTransfer.items].forEach((item: DataTransferItem, i) => {
 
-          if (item.kind === 'file') {
+        if (item.kind === 'file') {
 
-            const file = item.getAsFile()
+          const file = item.getAsFile()
 
-            if (file) {
+          if (file) {
 
-              setFileStack([...fileStack, file])
+            setFileStack([...fileStack, file])
 
-              console.log(fileStack)
+            console.log(fileStack)
 
-              console.log(`... file[${i}].name = ${file?.name}`)
-            }
+            console.log(`... file[${i}].name = ${file?.name}`)
           }
-        })
-      }
-
-      else {
-
-        [...event.dataTransfer.files].forEach((file, i) => {
-
-          console.log(`... file[${i}].name = ${file.name}`)
-        })
-      }
+        }
+      })
     }
 
-    const dragOverHandler = (event: DragEvent) => event.preventDefault()
+    else {
 
-    const createBlob = (file: File) => {
+      [...event.dataTransfer.files].forEach((file, i) => {
 
-      const blobHref = URL.createObjectURL(file)
-
-      const blobImg = document.createElement('img')
-
-      blobImg.src = blobHref
-
-      document.body.appendChild(blobImg)
+        console.log(`... file[${i}].name = ${file.name}`)
+      })
     }
+  }
 
-    const createNamedBlobs = (file: File) => {
+  const dragOverHandler = (event: DragEvent) => event.preventDefault()
 
-      const namedBlob = URL.createObjectURL(file)
+  const createBlob = (file: File) => {
 
-      console.log(namedBlob)
+    const blobHref = URL.createObjectURL(file)
 
-      return namedBlob
-    }
+    const blobImg = document.createElement('img')
 
-    const convertBlobToBase64 = (blob: Blob) => {
+    blobImg.src = blobHref
 
-      const reader = new FileReader()
+    document.body.appendChild(blobImg)
+  }
 
-      reader.readAsDataURL(blob)
+  const createNamedBlobs = (file: File) => {
+
+    const namedBlob = URL.createObjectURL(file)
+
+    console.log(namedBlob)
+
+    return namedBlob
+  }
+
+  const convertBlobToBase64 = async (blob: Blob) => {
+
+    const reader = new FileReader()
+
+    reader.readAsDataURL(blob)
+
+    return await new Promise<string>((resolve, reject) => {
+
       reader.onloadend = () => {
 
-        console.log(reader.result)
+        console.log(reader.result )
 
-        return reader.result
+        resolve(reader.result as unknown as string)
       }
-    }
+    })
+  }
 
-    const namedBlobs = fileStack.map((item) => createNamedBlobs(item))
-    //fileStack.forEach((item) => convertBlobToBase64(item))
+  const handleImage = async (img: File) => {
 
-    console.log(namedBlobs)
+    const base64 = await convertBlobToBase64(img)
 
-    console.log(fileStack)
+    const res = await fetchAPI(base64)
 
-    return (
+    console.log(res)
+  }
 
-      <>
+  const namedBlobs = fileStack.map((item) => convertBlobToBase64(item))
+  //fileStack.forEach((item) => convertBlobToBase64(item))
 
-        <section
-            className="flex items-center justify-center w-full min-h-[600px]"
+  console.log(namedBlobs)
+
+  console.log(fileStack)
+
+  const fetchAPI = async (image: string) => {
+
+    const res = await fetch('https://deepcoffe.com/api/classify', { method: 'POST', mode: "no-cors", keepalive: true, body: JSON.stringify({ image }) })
+
+    const json = await res.json()
+
+    return json.data;;
+  }
+
+  return (
+
+    <>
+
+      <section
+        className="flex items-center justify-center w-full min-h-[600px]"
+      >
+        <label
+          id="drop-zone"
+          onDrop={(event) => dropHandler(event)}
+          onDragOver={(event) => dragOverHandler(event)}
+          className="w-full max-w-3xl p-4 border-2 border-dashed rounded-l flex flex-col items-center justify-center gap-2 border-gray-300 dark:border-gray-800 cursor-pointer"
+          htmlFor="file-form"
         >
-            <label
-              id="drop-zone"
-              onDrop={(event) => dropHandler(event)}
-              onDragOver={(event) => dragOverHandler(event)}
-              className="w-full max-w-3xl p-4 border-2 border-dashed rounded-l flex flex-col items-center justify-center gap-2 border-gray-300 dark:border-gray-800 cursor-pointer"
-              htmlFor="file-form"
-            >
-                <span className="h-20 flex items-center gap-2 text-2xl font-semibold">
-                    <FileIcon className="w-6 h-6" />
-                    <span className="font-bold">Drag and drop your files here</span>
-                </span>
-                <label className="text-center text-sm text-gray-500 dark:text-gray-400" htmlFor="file-form">
-                    or
-                    <Button className="ml-2 -z-10" size="sm" onClick={() => document.getElementById('file-form')?.click()}>Choose a file to upload
+          <span className="h-20 flex items-center gap-2 text-2xl font-semibold">
+            <FileIcon className="w-6 h-6" />
+            <span className="font-bold">Drag and drop your files here</span>
+          </span>
+          <label className="text-center text-sm text-gray-500 dark:text-gray-400" htmlFor="file-form">
+            or
+            <Button className="ml-2 -z-10" size="sm" onClick={() => document.getElementById('file-form')?.click()}>Choose a file to upload
 
-                    </Button>
+            </Button>
 
-                    <input className="hidden" type="file" name="" id="file-form" />
-                </label>
-            </label>
-        </section>
+            <input className="hidden" type="file" name="" id="file-form" />
+          </label>
+        </label>
+      </section>
 
-        <section className="flex">
+      <section className="flex">
 
         {namedBlobs.map(elem => <ImageThumb src={elem} altText="hello" key={elem} />)}
-        </section>
+      </section>
 
-        {namedBlobs.length !== 0 &&
+      {namedBlobs.length !== 0 &&
 
         <UploadFilesConfirmation
-          src={namedBlobs[0]}
+          src={fileStack[0]}
           onCancelAction={() => namedBlobs.pop()}
-          onConfirmAction={() => window.alert("Ok OK OK")}
+          onConfirmAction={() => handleImage(fileStack[0])}
         />
-
       }
-      </>
-    )
+    </>
+  )
 }
