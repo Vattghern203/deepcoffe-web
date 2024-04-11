@@ -12,7 +12,9 @@ import UploadFilesConfirmation from "./Dialog";
 import { FileIcon } from "@radix-ui/react-icons";
 import { Button } from "@/components/ui/button";
 
-import "./upload-files.module.css";
+import './upload-files.module.css'
+import { json } from "stream/consumers";
+import serverRepository from "@/common/repository/ServerRepository";
 
 export default function Component() {
   const [fileStack, setFileStack] = useState<File[]>([]);
@@ -70,7 +72,8 @@ export default function Component() {
 
     return await new Promise<string>((resolve, reject) => {
       reader.onloadend = () => {
-        console.log(reader.result);
+
+        console.log(reader.result)
 
         resolve(reader.result as unknown as string);
       };
@@ -82,8 +85,7 @@ export default function Component() {
 
     const res = await fetchAPI(base64);
 
-    console.log(res);
-  };
+    const res = await fetchAPI(base64.replace('data:', '').replace(/^.+,/, ''))
 
   const namedBlobs = fileStack.map((item) => convertBlobToBase64(item));
   //fileStack.forEach((item) => convertBlobToBase64(item))
@@ -93,17 +95,8 @@ export default function Component() {
   console.log(fileStack);
 
   const fetchAPI = async (image: string) => {
-    const res = await fetch("https://deepcoffe.com/api/classify", {
-      method: "POST",
-      mode: "cors",
-      keepalive: true,
-      body: JSON.stringify({ image }),
-    });
-
-    const json = await res.json();
-
-    return json.data;
-  };
+    return await serverRepository.post('classify', { image });
+  }
 
   return (
     <>
