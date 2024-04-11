@@ -1,0 +1,19 @@
+section {
+
+  width: clamp(fit-content, 100%, 100vmax);
+
+  &:empty { display: none; }
+
+  & > * {
+
+    width: 100%;
+    height: auto;
+    object-fit: center;
+  }
+
+  & > :not(:last-child) {
+
+    margin-bottom: 1rem;
+
+  }
+}

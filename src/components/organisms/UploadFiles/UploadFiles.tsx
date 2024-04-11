@@ -5,18 +5,21 @@
  */
 import { DragEvent, useState } from "react";
 
-import { ImageThumb } from "@/components/molecules";
-
 import UploadFilesConfirmation from "./Dialog";
 
 import { FileIcon } from "@radix-ui/react-icons";
 import { Button } from "@/components/ui/button";
 
 import './upload-files.module.css'
-import { json } from "stream/consumers";
+
 import serverRepository from "@/common/repository/ServerRepository";
 
+import RandomGrid from "@/components/atoms/RandomGrid/RandomGrid";
+
 export default function Component() {
+
+  // Create a state to handle a drag and drop event
+
   const [fileStack, setFileStack] = useState<File[]>([]);
 
   const dropHandler = (event: DragEvent) => {
@@ -29,10 +32,13 @@ export default function Component() {
         if (item.kind === "file") {
           const file = item.getAsFile();
 
-          if (file) {
-            setFileStack([...fileStack, file]);
+          if (file && file.type.startsWith('image/')) {
 
-            console.log(fileStack);
+            console.log(file.type)
+
+            setFileStack((prevStack) => [...prevStack, file]);
+
+            console.log('fileStack',fileStack);
 
             console.log(`... file[${i}].name = ${file?.name}`);
           }
@@ -45,32 +51,36 @@ export default function Component() {
     }
   };
 
+  // Handles the dragover, blocking the usual behavior
+
   const dragOverHandler = (event: DragEvent) => event.preventDefault();
 
-  const createBlob = (file: File) => {
-    const blobHref = URL.createObjectURL(file);
+  // Create a blob url for this image and append to DOM
 
-    const blobImg = document.createElement("img");
+  /* const createBlob = (file: File) => {
+     const blobHref = URL.createObjectURL(file);
 
-    blobImg.src = blobHref;
+     const blobImg = document.createElement("img");
 
-    document.body.appendChild(blobImg);
-  };
+     blobImg.src = blobHref;
 
-  const createNamedBlobs = (file: File) => {
-    const namedBlob = URL.createObjectURL(file);
+     document.body.appendChild(blobImg);
+   };
+ */
+   const createNamedBlob = (file: File) => {
+     const namedBlob = URL.createObjectURL(file);
 
-    console.log(namedBlob);
+     console.log(namedBlob);
 
-    return namedBlob;
-  };
+     return namedBlob;
+   }
 
   const convertBlobToBase64 = async (blob: Blob) => {
     const reader = new FileReader();
 
     reader.readAsDataURL(blob);
 
-    return await new Promise<string>((resolve, reject) => {
+    return await new Promise<string>((resolve) => {
       reader.onloadend = () => {
 
         console.log(reader.result)
@@ -80,23 +90,27 @@ export default function Component() {
     });
   };
 
-  const handleImage = async (img: File) => {
-    const base64 = await convertBlobToBase64(img);
-
-    const res = await fetchAPI(base64);
-
-    const res = await fetchAPI(base64.replace('data:', '').replace(/^.+,/, ''))
-
-  const namedBlobs = fileStack.map((item) => convertBlobToBase64(item));
-  //fileStack.forEach((item) => convertBlobToBase64(item))
-
-  console.log(namedBlobs);
-
-  console.log(fileStack);
-
   const fetchAPI = async (image: string) => {
     return await serverRepository.post('classify', { image });
   }
+
+  const handleImage = async (img: File) => {
+    const base64 = await convertBlobToBase64(img);
+
+    fileStack.pop()
+
+    const res = await fetchAPI(base64.replace('data:', '').replace(/^.+,/, ''))
+
+    console.log(res)
+  }
+
+    const namedBlobs = fileStack.map((item) => createNamedBlob(item));
+    //fileStack.forEach((item) => convertBlobToBase64(item))
+
+    console.log(namedBlobs);
+
+    console.log(fileStack);
+
 
   return (
     <>
@@ -129,19 +143,19 @@ export default function Component() {
         </label>
       </section>
 
-      <section className="flex">
-        {namedBlobs.map((elem) => (
-          <ImageThumb src={elem} altText="hello" key={elem} />
-        ))}
-      </section>
+      {<RandomGrid>
+          {namedBlobs.map((elem) => (
+            <img loading="lazy" className="rounded-md" src={elem} alt="Sample Image" key={elem} />
+          ))}
+        </RandomGrid> }
 
       {namedBlobs.length !== 0 && (
         <UploadFilesConfirmation
-          src={fileStack[0]}
-          onCancelAction={() => namedBlobs.pop()}
+          src={namedBlobs[0]}
+          onCancelAction={() => setFileStack([])}
           onConfirmAction={() => handleImage(fileStack[0])}
         />
       )}
     </>
-  );
+  )
 }

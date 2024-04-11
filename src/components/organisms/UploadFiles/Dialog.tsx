@@ -1,35 +1,37 @@
-import { Dialog, DialogHeader, DialogTitle, DialogDescription, DialogContent, DialogTrigger } from "@/components/ui/dialog"
-
 import { Button } from "@/components/ui/button"
-
+import { Dialog, DialogHeader, DialogTitle, DialogDescription, DialogContent, DialogFooter,  DialogClose } from "@/components/ui/dialog"
 import { ImageThumb } from "@/components/molecules/"
 
-interface props {
+
+
+interface DialogProps {
   src: string,
   onCancelAction: () => void,
   onConfirmAction: () => void
 }
 
-export default function UploadFilesConfirmation({ src, onCancelAction, onConfirmAction }:props) {
+export default function UploadFilesConfirmation({ src, onCancelAction, onConfirmAction }:DialogProps) {
 
   return (
 
     <Dialog defaultOpen>
-      <DialogTrigger asChild />
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Analyze this Image</DialogTitle>
+          <DialogTitle>Confirm this image to be analysed?</DialogTitle>
 
-          <DialogDescription>The image cannot be changed untile the process is finished</DialogDescription>
+          <DialogDescription>The image cannot be changed until the process is finished.</DialogDescription>
         </DialogHeader>
 
-        <ImageThumb src={src} altText="" />
+        <ImageThumb src={src} altText="Image to be analysed." />
 
-
-        <section className="inline-flex justify-center w-full gap-4">
-          <Button variant={"outline"} onClick={onCancelAction}>Cancel</Button>
-          <Button onClick={onConfirmAction}>Ok</Button>
-        </section>
+        <DialogFooter>
+            <Button variant={"outline"} onClick={onCancelAction}>Cancel</Button>
+          <DialogClose>
+            close
+          </DialogClose>
+          <Button onClick={onConfirmAction}>
+            <DialogClose />Ok</Button>
+        </DialogFooter>
       </DialogContent>
     </Dialog>
   )
