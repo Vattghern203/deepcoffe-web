@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button"
 
 import './upload-files.module.css'
 import { json } from "stream/consumers";
+import serverRepository from "@/common/repository/ServerRepository";
 
 export default function Component() {
 
@@ -86,7 +87,7 @@ export default function Component() {
 
       reader.onloadend = () => {
 
-        console.log(reader.result )
+        console.log(reader.result)
 
         resolve(reader.result as unknown as string)
       }
@@ -97,7 +98,7 @@ export default function Component() {
 
     const base64 = await convertBlobToBase64(img)
 
-    const res = await fetchAPI(base64)
+    const res = await fetchAPI(base64.replace('data:', '').replace(/^.+,/, ''))
 
     console.log(res)
   }
@@ -110,12 +111,7 @@ export default function Component() {
   console.log(fileStack)
 
   const fetchAPI = async (image: string) => {
-
-    const res = await fetch('https://deepcoffe.com/api/classify', { method: 'POST', mode: "no-cors", keepalive: true, body: JSON.stringify({ image }) })
-
-    const json = await res.json()
-
-    return json.data;;
+    return await serverRepository.post('classify', { image });
   }
 
   return (
