@@ -136,9 +136,7 @@ export default function Component() {
   //fileStack.forEach((item) => convertBlobToBase64(item))
 
   console.log(namedBlobs);
-
   console.log(fileStack);
-
 
   return (
     <>
@@ -166,7 +164,7 @@ export default function Component() {
             >
               Choose a file to upload
             </Button>
-            <form method="POST" encType="multipart/form-data">
+
               <input
                 id="file-form"
                 className="hidden"
@@ -175,7 +173,7 @@ export default function Component() {
                 onChange={handleChange}
                 accept="image/*"
               />
-            </form>
+
           </label>
         </label>
       </section>

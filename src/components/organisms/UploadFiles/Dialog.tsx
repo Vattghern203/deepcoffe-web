@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button"
-import { Dialog, DialogHeader, DialogTitle, DialogDescription, DialogContent, DialogFooter,  DialogClose } from "@/components/ui/dialog"
+import { Dialog, DialogHeader, DialogTitle, DialogDescription, DialogContent, DialogFooter, DialogClose } from "@/components/ui/dialog"
 import { ImageThumb } from "@/components/molecules/"
-
 
 
 interface DialogProps {
@@ -10,7 +9,7 @@ interface DialogProps {
   onConfirmAction: () => void
 }
 
-export default function UploadFilesConfirmation({ src, onCancelAction, onConfirmAction }:DialogProps) {
+export default function UploadFilesConfirmation({ src, onCancelAction, onConfirmAction }: DialogProps) {
 
   return (
 
@@ -25,7 +24,7 @@ export default function UploadFilesConfirmation({ src, onCancelAction, onConfirm
         <ImageThumb src={src} altText="Image to be analysed." />
 
         <DialogFooter>
-            <Button variant={"outline"} onClick={onCancelAction}>Cancel</Button>
+          <Button variant={"outline"} onClick={onCancelAction}>Cancel</Button>
           <DialogClose>
             close
           </DialogClose>
