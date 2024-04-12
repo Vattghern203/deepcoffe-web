@@ -1,6 +1,6 @@
-section {
+.random_grid {
 
-  width: clamp(fit-content, 100%, 100vmax);
+  width: fit-content;
 
   &:empty { display: none; }
 
@@ -9,11 +9,12 @@ section {
     width: 100%;
     height: auto;
     object-fit: center;
+    margin-inline: auto;
   }
 
   & > :not(:last-child) {
 
-    margin-bottom: 1rem;
+    margin-bottom: .25rem;
 
   }
 }

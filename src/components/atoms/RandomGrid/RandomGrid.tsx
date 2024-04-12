@@ -1,6 +1,6 @@
 import { ReactNode } from "react"
 
-import "./random-grid.modle.css"
+import styles from "./random-grid.module.css"
 
 interface RandomGridProps {
   children: ReactNode
@@ -12,13 +12,12 @@ export default function RandomGrid( { children, cols=3 }:RandomGridProps ) {
   return (
 
     <section
-      className="gap-4 bg-zinc-950 p-4 rounded-md"
+      className={`${styles.random_grid} gap-1 p-1 bg-zinc-950 dark:bg-white rounded-sm`}
       style={
         {
           columnCount: cols
         }
       }
-      role=""
     >
       {children}
     </section>

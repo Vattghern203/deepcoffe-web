@@ -3,7 +3,7 @@
  * @see https://v0.dev/t/mjOlVnIqPys
  * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
  */
-import { DragEvent, useState } from "react";
+import { ChangeEvent, DragEvent, useState, useRef } from "react";
 
 import UploadFilesConfirmation from "./Dialog";
 
@@ -22,6 +22,8 @@ export default function Component() {
 
   const [fileStack, setFileStack] = useState<File[]>([]);
 
+  const imageInputRef = useRef<HTMLInputElement>(null)
+
   const dropHandler = (event: DragEvent) => {
     console.log("File(s) dropped");
 
@@ -38,7 +40,7 @@ export default function Component() {
 
             setFileStack((prevStack) => [...prevStack, file]);
 
-            console.log('fileStack',fileStack);
+            console.log('fileStack', fileStack);
 
             console.log(`... file[${i}].name = ${file?.name}`);
           }
@@ -55,6 +57,32 @@ export default function Component() {
 
   const dragOverHandler = (event: DragEvent) => event.preventDefault();
 
+  const files: string[] = []
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+
+    const selectedFile = event.target.files?.[0]
+
+    selectedFile ? setFileStack((prev) => [...prev, selectedFile]) : null
+  }
+
+  /* const createBlob = (file: File ) => {
+    const reader = new FileReader();
+
+    reader.readAsDataURL(file); // Read the file as data URL
+
+    reader.onloadend = () => {
+      const base64Data = reader.result?.slice(reader.result?.indexOf(',') + 1) || '';
+
+      const contentType = reader.result?.split(',')[0]?.replace('data:', '') || '';
+
+      const blob = new Blob([base64Data], { type: contentType });
+
+      // Use the created blob for further processing (e.g., upload, preview)
+      console.log('Created Blob:', blob);
+    };
+  }; */
+
   // Create a blob url for this image and append to DOM
 
   /* const createBlob = (file: File) => {
@@ -68,12 +96,12 @@ export default function Component() {
    };
  */
    const createNamedBlob = (file: File) => {
-     const namedBlob = URL.createObjectURL(file);
+    const namedBlob = URL.createObjectURL(file);
 
-     console.log(namedBlob);
+    console.log(namedBlob);
 
-     return namedBlob;
-   }
+    return namedBlob;
+  }
 
   const convertBlobToBase64 = async (blob: Blob) => {
     const reader = new FileReader();
@@ -104,12 +132,12 @@ export default function Component() {
     console.log(res)
   }
 
-    const namedBlobs = fileStack.map((item) => createNamedBlob(item));
-    //fileStack.forEach((item) => convertBlobToBase64(item))
+  const namedBlobs = fileStack.map((item) => createNamedBlob(item));
+  //fileStack.forEach((item) => convertBlobToBase64(item))
 
-    console.log(namedBlobs);
+  console.log(namedBlobs);
 
-    console.log(fileStack);
+  console.log(fileStack);
 
 
   return (
@@ -138,16 +166,27 @@ export default function Component() {
             >
               Choose a file to upload
             </Button>
-            <input className="hidden" type="file" name="" id="file-form" />
+            <form method="POST" encType="multipart/form-data">
+              <input
+                id="file-form"
+                className="hidden"
+                type="file"
+                ref={imageInputRef}
+                onChange={handleChange}
+                accept="image/*"
+              />
+            </form>
           </label>
         </label>
       </section>
 
+      <img src={files[0] || 'vite.svg'} alt="" />
+
       {<RandomGrid>
-          {namedBlobs.map((elem) => (
-            <img loading="lazy" className="rounded-md" src={elem} alt="Sample Image" key={elem} />
-          ))}
-        </RandomGrid> }
+        {namedBlobs.map((elem) => (
+          <img loading="lazy" className="rounded-md" src={elem} alt="Sample Image" key={elem} />
+        ))}
+      </RandomGrid>}
 
       {namedBlobs.length !== 0 && (
         <UploadFilesConfirmation
