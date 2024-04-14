@@ -6,6 +6,7 @@
 import { ChangeEvent, DragEvent, useState, useRef } from "react";
 
 import UploadFilesConfirmation from "./Dialog";
+import Result from "@/components/molecules/Result/Result";
 
 import { FileIcon } from "@radix-ui/react-icons";
 import { Button } from "@/components/ui/button";
@@ -128,7 +129,6 @@ export default function Component() {
     fileStack.pop()
 
     const res = await fetchAPI(base64.replace('data:', '').replace(/^.+,/, ''))
-
     console.log(res)
   }
 
@@ -193,6 +193,9 @@ export default function Component() {
           onConfirmAction={() => handleImage(fileStack[0])}
         />
       )}
+
+      <Result
+      />
     </>
   )
 }
