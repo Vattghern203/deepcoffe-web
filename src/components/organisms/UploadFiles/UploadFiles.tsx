@@ -145,7 +145,7 @@ export default function Component() {
           id="drop-zone"
           onDrop={(event) => dropHandler(event)}
           onDragOver={(event) => dragOverHandler(event)}
-          className="w-full max-w-3xl p-4 border-2 border-dashed rounded-l flex flex-col items-center justify-center gap-2 border-gray-300 dark:border-gray-800 cursor-pointer"
+          className="w-full max-w-3xl p-4 border-2 border-dashed rounded-l flex flex-col items-center justify-center gap-2 border-zinc-300 dark:border-secondary cursor-pointer"
           htmlFor="file-form"
         >
           <span className="h-20 flex items-center gap-2 text-2xl font-semibold">
