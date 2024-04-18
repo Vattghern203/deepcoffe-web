@@ -8,7 +8,7 @@ interface IResultData {
 
 interface ResultListProps {
 
-  resultData: Array<IResultData>
+  resultData: IResultData[]
 }
 
 export default function ResultList( { resultData }:ResultListProps ) {

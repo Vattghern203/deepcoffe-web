@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button"
 import { Dialog, DialogHeader, DialogTitle, DialogDescription, DialogContent, DialogFooter, DialogClose } from "@/components/ui/dialog"
 import { ImageThumb } from "@/components/molecules/"
 
+//import { useToggle } from "@/hooks/useToggle"
 
 interface DialogProps {
   src: string,
@@ -10,6 +11,8 @@ interface DialogProps {
 }
 
 export default function UploadFilesConfirmation({ src, onCancelAction, onConfirmAction }: DialogProps) {
+
+  //const [isOpen, setIsOpen] = useToggle(false)
 
   return (
 
@@ -24,12 +27,14 @@ export default function UploadFilesConfirmation({ src, onCancelAction, onConfirm
         <ImageThumb src={src} altText="Image to be analysed." />
 
         <DialogFooter>
-          <Button variant={"outline"} onClick={onCancelAction}>Cancel</Button>
-          <DialogClose>
-            close
+          <DialogClose asChild>
+            <Button variant={"outline"} onClick={onCancelAction}>Cancel</Button>
           </DialogClose>
-          <Button onClick={onConfirmAction}>
-            <DialogClose />Ok</Button>
+          <DialogClose asChild >
+            <Button onClick={onConfirmAction}>
+              Ok
+            </Button>
+          </DialogClose>
         </DialogFooter>
       </DialogContent>
     </Dialog>

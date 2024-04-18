@@ -1,17 +1,10 @@
-import { Button } from "@/components/ui/button"
-import ImageThumb from "../ImageThumb/ImageThumb"
-import { Separator } from "@/components/ui/separator"
-
 interface ResultProps {
   resultTitle: string
   resultDate: string
   sampleImageURL?: string
   resultData: Array<string>
 }
-
-export function Result1( { resultTitle, resultData, resultDate, sampleImageURL }:ResultProps ) {
-
-  return (
+ (
     {/* <article
       className="rounded-lg border-2 border-solid border-zinc-900 grid grid-cols-2 grid-template-rows: max-content fit-content max-content; gap-6 pt-8 items-start place-items-center place-content-center justify-items-center max-w-[80dvmin] mx-auto"
     >

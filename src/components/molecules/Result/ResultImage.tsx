@@ -3,12 +3,12 @@ import { ImgHTMLAttributes } from "react"
 
 interface ResultImageProps extends ImgHTMLAttributes<HTMLImageElement> {
 
-  imgSrc: string
+  imgSrc?: string
   imgAlt?: string
   aspect?: string
 }
 
-export default function ResultImage( { imgSrc, imgAlt, aspect="250/300", ...rest }:ResultImageProps ) {
+export default function ResultImage( { imgSrc, imgAlt, aspect="250/300"}:ResultImageProps ) {
 
   return (
 
@@ -23,7 +23,7 @@ export default function ResultImage( { imgSrc, imgAlt, aspect="250/300", ...rest
         objectPosition: "center"
       }}
       width="250"
-      {...rest}
+      
     />
   )
 }

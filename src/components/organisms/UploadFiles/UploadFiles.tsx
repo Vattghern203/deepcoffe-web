@@ -6,7 +6,8 @@
 import { ChangeEvent, DragEvent, useState, useRef } from "react";
 
 import UploadFilesConfirmation from "./Dialog";
-import Result from "@/components/molecules/Result/Result";
+/* import Result from "@/components/molecules/Result/Result"; */
+import { Result } from "@/components/molecules/"
 
 import { FileIcon } from "@radix-ui/react-icons";
 import { Button } from "@/components/ui/button";
@@ -57,8 +58,6 @@ export default function Component() {
   // Handles the dragover, blocking the usual behavior
 
   const dragOverHandler = (event: DragEvent) => event.preventDefault();
-
-  const files: string[] = []
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
 
@@ -178,8 +177,6 @@ export default function Component() {
         </label>
       </section>
 
-      <img src={files[0] || 'vite.svg'} alt="" />
-
       {<RandomGrid>
         {namedBlobs.map((elem) => (
           <img loading="lazy" className="rounded-md" src={elem} alt="Sample Image" key={elem} />
@@ -194,8 +191,33 @@ export default function Component() {
         />
       )}
 
-      <Result
-      />
+      <Result.Root>
+        <Result.ImageSection>
+          <Result.Image />
+        </Result.ImageSection>
+
+        <Result.DataSection>
+          <Result.List
+            resultData={[
+              {
+                label: 'doenca 01',
+                value: 10
+              },
+
+              {
+                label: 'doenca 02',
+                value: 90
+              },
+
+              {
+                label: 'doenca 03',
+                value: 35.55
+              }
+            ]}
+          >
+          </Result.List>
+        </Result.DataSection>
+      </Result.Root>
     </>
   )
 }
