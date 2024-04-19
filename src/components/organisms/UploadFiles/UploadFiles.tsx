@@ -3,10 +3,10 @@
  * @see https://v0.dev/t/mjOlVnIqPys
  * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
  */
-import { ChangeEvent, DragEvent, useState, useRef } from "react";
+import { ChangeEvent, DragEvent, lazy, useState, useRef } from "react";
 
 import UploadFilesConfirmation from "./Dialog";
-/* import Result from "@/components/molecules/Result/Result"; */
+
 import { Result } from "@/components/molecules/";
 
 import { FileIcon } from "@radix-ui/react-icons";
@@ -18,11 +18,14 @@ import serverRepository from "@/common/repository/ServerRepository";
 
 import RandomGrid from "@/components/atoms/RandomGrid/RandomGrid";
 import PopUpAlert from "@/components/molecules/Alert/Alert";
+import { useToggle } from "@/hooks/useToggle";
 
-export default function Component() {
+export default function UploadFiles() {
   // Create a state to handle a drag and drop event
 
   const [fileStack, setFileStack] = useState<File[]>([]);
+
+  const [isLoading, setIsLoading] = useState(false)
 
   const imageInputRef = useRef<HTMLInputElement>(null);
 
@@ -54,8 +57,6 @@ export default function Component() {
     }
   };
 
-  // Handles the dragover, blocking the usual behavior
-
   const dragOverHandler = (event: DragEvent) => event.preventDefault();
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -64,35 +65,7 @@ export default function Component() {
     selectedFile ? setFileStack((prev) => [...prev, selectedFile]) : null;
   };
 
-  /* const createBlob = (file: File ) => {
-    const reader = new FileReader();
 
-    reader.readAsDataURL(file); // Read the file as data URL
-
-    reader.onloadend = () => {
-      const base64Data = reader.result?.slice(reader.result?.indexOf(',') + 1) || '';
-
-      const contentType = reader.result?.split(',')[0]?.replace('data:', '') || '';
-
-      const blob = new Blob([base64Data], { type: contentType });
-
-      // Use the created blob for further processing (e.g., upload, preview)
-      console.log('Created Blob:', blob);
-    };
-  }; */
-
-  // Create a blob url for this image and append to DOM
-
-  /* const createBlob = (file: File) => {
-     const blobHref = URL.createObjectURL(file);
-
-     const blobImg = document.createElement("img");
-
-     blobImg.src = blobHref;
-
-     document.body.appendChild(blobImg);
-   };
- */
   const createNamedBlob = (file: File) => {
     const namedBlob = URL.createObjectURL(file);
 
@@ -134,6 +107,26 @@ export default function Component() {
   console.log(namedBlobs);
   console.log(fileStack);
 
+  const mockLoading = async (image: File) => {
+
+    const base64 = await convertBlobToBase64(image)
+
+    console.log('Converted')
+
+    new Promise((resolve, reject) => {
+
+      setTimeout(() => {
+
+        resolve(setIsLoading(() => false))
+
+        console.log('Finished')
+
+        reject('Failed as fuck')
+      }, 4000)
+
+    })
+  }
+
   return (
     <>
       <section className="flex items-center justify-center w-full min-h-[600px]">
@@ -146,19 +139,19 @@ export default function Component() {
         >
           <span className="h-20 flex items-center gap-2 text-2xl font-semibold">
             <FileIcon className="w-6 h-6" />
-            <span className="font-bold">Drag and drop your files here</span>
+            <span className="font-bold">Arraste e solte seus arquivos aqui</span>
           </span>
           <label
             className="text-center text-sm text-gray-500 dark:text-gray-400"
             htmlFor="file-form"
           >
-            or
+            ou
             <Button
               className="ml-2 -z-10"
               size="sm"
               onClick={() => document.getElementById("file-form")?.click()}
             >
-              Choose a file to upload
+              Escolher um arquivo
             </Button>
             <input
               id="file-form"
@@ -190,7 +183,10 @@ export default function Component() {
         <UploadFilesConfirmation
           src={namedBlobs[0]}
           onCancelAction={() => setFileStack([])}
-          onConfirmAction={() => handleImage(fileStack[0])}
+          onConfirmAction={() => {
+            mockLoading(fileStack[0])
+            setIsLoading(true)
+          }}
         />
       )}
 
@@ -222,7 +218,7 @@ export default function Component() {
       </Result.Root>
 
       <PopUpAlert
-        isLoading={false}
+        isLoading={isLoading}
         alertTitle="Analisando Amostra"
         alertDescription="Isso pode levar um tempo. Sinta-se livre para navegar em outra páginas do site. Você será avisado assim que o processo terminar."
       />
