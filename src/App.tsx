@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { ThemeProvider } from './components/theme-provider'
 
 import { About, Dashboad, Home, News } from '@/pages'
-import { ModeToggle } from './components/mode-toggle'
+
 
 function App() {
 
@@ -38,7 +38,6 @@ function App() {
     <ThemeProvider >
       <Router>
         <Nav />
-        <ModeToggle />
       <main>
         <Routes>
           <Route path='/' element={<Home />} />
