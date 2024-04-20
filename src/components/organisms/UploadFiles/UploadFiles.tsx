@@ -18,7 +18,6 @@ import serverRepository from "@/common/repository/ServerRepository";
 
 import RandomGrid from "@/components/atoms/RandomGrid/RandomGrid";
 import PopUpAlert from "@/components/molecules/Alert/Alert";
-import { useToggle } from "@/hooks/useToggle";
 
 export default function UploadFiles() {
   // Create a state to handle a drag and drop event
@@ -151,7 +150,7 @@ export default function UploadFiles() {
               size="sm"
               onClick={() => document.getElementById("file-form")?.click()}
             >
-              Escolher um arquivo
+              Escolha um arquivo
             </Button>
             <input
               id="file-form"
@@ -160,6 +159,7 @@ export default function UploadFiles() {
               ref={imageInputRef}
               onChange={handleChange}
               accept="image/*"
+              required
             />
           </label>
         </label>
