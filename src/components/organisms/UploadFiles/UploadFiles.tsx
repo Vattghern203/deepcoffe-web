@@ -3,7 +3,7 @@
  * @see https://v0.dev/t/mjOlVnIqPys
  * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
  */
-import { ChangeEvent, DragEvent, lazy, useState, useRef } from "react";
+import { ChangeEvent, DragEvent, useState, useRef } from "react";
 
 import UploadFilesConfirmation from "./Dialog";
 
@@ -11,8 +11,6 @@ import { Result } from "@/components/molecules/";
 
 import { FileIcon } from "@radix-ui/react-icons";
 import { Button } from "@/components/ui/button";
-
-import "./upload-files.module.css";
 
 import serverRepository from "@/common/repository/ServerRepository";
 
@@ -25,6 +23,8 @@ export default function UploadFiles() {
   const [fileStack, setFileStack] = useState<File[]>([]);
 
   const [isLoading, setIsLoading] = useState(false)
+
+  const [isBeingDragged, setIsBeingDragged] = useState(false)
 
   const imageInputRef = useRef<HTMLInputElement>(null);
 
@@ -56,7 +56,12 @@ export default function UploadFiles() {
     }
   };
 
-  const dragOverHandler = (event: DragEvent) => event.preventDefault();
+  const dragOverHandler = (event: DragEvent) => {
+    event.preventDefault();
+
+    setIsBeingDragged(true)
+  }
+
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const selectedFile = event.target.files?.[0];
@@ -133,7 +138,11 @@ export default function UploadFiles() {
           id="drop-zone"
           onDrop={(event) => dropHandler(event)}
           onDragOver={(event) => dragOverHandler(event)}
-          className="w-full max-w-3xl p-4 border-2 border-dashed rounded-l flex flex-col items-center justify-center gap-2 border-zinc-300 dark:border-secondary cursor-pointer"
+          onDragLeave={() => setIsBeingDragged(false)}
+          data-dragged={isBeingDragged}
+          className="w-full max-w-3xl p-4 border-2 border-dashed flex flex-col items-center justify-center gap-2 border-secondary-foreground dark:border-secondary cursor-pointer transition-all ease-in-out
+          data-[dragged=true]:bg-secondary
+          rounded-l"
           htmlFor="file-form"
         >
           <span className="h-20 flex items-center gap-2 text-2xl font-semibold">

@@ -30,25 +30,25 @@ export default function Component() {
           <nav className="flex-1">
             <ul  className="flex justify-center gap-6 items-center">
               <Link
-                className="font-medium border-b-2 border-transparent transition-colors hover:border-gray-100/60 focus:border-gray-100/60"
+                className="font-medium border-b-2 border-transparent transition-colors hover:border-accent-foreground/60 focus:border-accent-foreground/60"
                 to="/"
               >
                 Home
               </Link>
               <Link
-                className="font-medium border-b-2 border-transparent transition-colors hover:border-gray-100/60 focus:border-gray-100/60"
+                className="font-medium border-b-2 border-transparent transition-colors hover:border-accent-foreground/60 focus:border-accent-foreground/60"
                 to="/news"
               >
                 News
               </Link>
               <Link
-                className="font-medium border-b-2 border-transparent transition-colors hover:border-gray-100/60 focus:border-gray-100/60"
+                className="font-medium border-b-2 border-transparent transition-colors hover:border-accent-foreground/60 focus:border-accent-foreground/60"
                 to="/dashboard"
               >
                 Dashboard
               </Link>
               <Link
-                className="font-medium border-b-2 border-transparent transition-colors hover:border-gray-100/60 focus:border-gray-100/60"
+                className="font-medium border-b-2 border-transparent transition-colors hover:border-accent-foreground/60 focus:border-accent-foreground/60"
                 to="/about"
               >
                 About

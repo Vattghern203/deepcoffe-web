@@ -3,6 +3,8 @@ import Article from '@/components/organisms/Article'
 import NewsContainer from '@/components/templates/News/News'
 import { XIcon } from 'lucide-react'
 
+import AlertTimer from '@/components/molecules/Alert/AlertTimer'
+
 export default function News() {
 
     return (
@@ -27,6 +29,8 @@ export default function News() {
             onClickAction={() => console.log('Cliquei')}
           />
           </Article.Root>
+
+          <AlertTimer isShowing={true} durationInMS={4000} />
         </NewsContainer>
 
     )
