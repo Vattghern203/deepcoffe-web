@@ -32,12 +32,18 @@ export class ServerRepository implements IServerRepository {
     }
   }
 
-  private async request<R>(url: string, method: HttpMethods, data?: string): Promise<IServerResponseSuccess<R>> {
+  private async request<R>(url: string, method: HttpMethods, data?: string, timeout = 30000): Promise<IServerResponseSuccess<R>> {
+    const controller = new AbortController();
+
+    const id = setTimeout(() => controller.abort(), timeout)
     const response = await fetch(url, {
       ...this.serverConfiguration,
       method: method,
-      ...(data && { body: data })
+      ...(data && { body: data }),
+      signal: controller.signal
     });
+
+    clearTimeout(id);
 
     const responseParsed = await response.json();
 
@@ -61,7 +67,7 @@ export class ServerRepository implements IServerRepository {
     return await this.request(url, HttpMethods.GET);
   }
 
-  public async post<R, T>(path: string, payload?: T, auth = true): Promise<IServerResponseSuccess<R>> {
+  public async post<R, T>(path: string, payload?: T, auth = true, timeout = 30000): Promise<IServerResponseSuccess<R>> {
     const url = `${this._serverUrl}/${path}`;
     const data = JSON.stringify(payload);
 
@@ -71,10 +77,10 @@ export class ServerRepository implements IServerRepository {
         authorization: `Bearer ${this._jwt}`
       });
 
-      return await this.request(url, HttpMethods.POST, data);
+      return await this.request(url, HttpMethods.POST, data, timeout);
     }
 
-    return await this.request(url, HttpMethods.POST, data);
+    return await this.request(url, HttpMethods.POST, data, timeout);
   }
 
 
