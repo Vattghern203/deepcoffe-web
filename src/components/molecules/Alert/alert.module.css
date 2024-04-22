@@ -1,0 +1,27 @@
+@import url("../../../assets/css/_animation.css");
+
+.alert {
+
+  display: grid;
+  grid-template-columns: max-content max-content;
+  grid-template-rows: min-content min-content;
+
+  animation: fade 1.8s ease-in-out 1 reverse;
+
+  & > svg {
+
+    align-self: center;
+    grid-row: span 2;
+  }
+
+  & > h5 {
+
+    grid-column: 3 / 4;
+    grid-row: 1 / 2;
+  }
+
+  & > div {
+
+    grid-column: 3 / 4;
+  }
+}

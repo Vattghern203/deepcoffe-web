@@ -1,0 +1,5 @@
+@import url(../../../assets/css/_animation.css);
+
+.temp {
+  animation: fade 1.8s ease-in-out 1 reverse;
+}

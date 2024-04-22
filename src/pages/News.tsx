@@ -2,8 +2,9 @@ import PopUpNotificationBtn from '@/components/molecules/IconButton/IconButton'
 import Article from '@/components/organisms/Article'
 import NewsContainer from '@/components/templates/News/News'
 import { XIcon } from 'lucide-react'
-
-import AlertTimer from '@/components/molecules/Alert/AlertTimer'
+import TemporaryPopup from '@/components/atoms/TemporaryPopUp/TemporaryPopUp'
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
+import AlertRoot from '@/components/molecules/Alert/AlertRoot'
 
 export default function News() {
 
@@ -30,7 +31,15 @@ export default function News() {
           />
           </Article.Root>
 
-          <AlertTimer isShowing={true} durationInMS={4000} />
+          <TemporaryPopup variant='destructiv'>
+            <AlertTitle>
+              lorem
+            </AlertTitle>
+            <AlertDescription>
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsa labore cumque dolore cupiditate aliquid doloremque possimus animi enim facere hic autem, id ab eligendi natus dignissimos, voluptatem libero voluptatum non.
+            </AlertDescription>
+          </TemporaryPopup>
+
         </NewsContainer>
 
     )

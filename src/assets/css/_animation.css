@@ -1,0 +1,9 @@
+@keyframes fade {
+  0% {
+    opacity: initial;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}

@@ -131,6 +131,8 @@ export default function UploadFiles() {
     })
   }
 
+  console.log('Renderizou')
+
   return (
     <>
       <section className="flex items-center justify-center w-full min-h-[600px]">

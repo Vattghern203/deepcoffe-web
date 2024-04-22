@@ -11,7 +11,7 @@ export default function Dashboard() {
     <div className="flex h-screen overflow-hidden text-sm bg-gray-100 dark:bg-gray-900">
       <div className="flex flex-col w-64 border-r border-gray-200 dark:border-gray-800">
         <div className="flex items-center h-16 px-6 border-b">
-          <Link className="flex items-center gap-2 text-lg font-semibold" href="#">
+          <Link className="flex items-center gap-2 text-lg font-semibold" to="#">
             <Package2Icon className="w-6 h-6" />
             <span className="sr-only">Acme Inc</span>
           </Link>
@@ -51,7 +51,7 @@ export default function Dashboard() {
       </div>
       <div className="flex flex-col w-full min-h-screen">
         <header className="flex items-center h-16 px-6 border-b">
-          <Link className="mr-2 md:hidden" href="#">
+          <Link className="mr-2 md:hidden" to="#">
             <ChevronRightIcon className="w-6 h-6" />
             <span className="sr-only">Toggle sidebar</span>
           </Link>

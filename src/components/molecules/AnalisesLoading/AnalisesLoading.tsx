@@ -1,5 +1,7 @@
 import { Progress } from "@radix-ui/react-progress"
 
+import { JSX } from "react"
+
 export default function AnalisesLoading() {
 
   return (
@@ -16,7 +18,7 @@ export default function AnalisesLoading() {
   )
 }
 
-function DatabaseIcon(props) {
+/* function DatabaseIcon(props: JSX.IntrinsicAttributes) {
   return (
     <svg
       {...props}
@@ -35,5 +37,5 @@ function DatabaseIcon(props) {
       <path d="M3 12A9 3 0 0 0 21 12" />
     </svg>
   )
-}
+} */
 
