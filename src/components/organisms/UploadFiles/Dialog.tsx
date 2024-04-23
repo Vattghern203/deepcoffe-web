@@ -26,7 +26,7 @@ export default function UploadFilesConfirmation({ src, onCancelAction, onConfirm
 
         <ImageThumb src={src} altText="Image to be analysed." />
 
-        <DialogFooter>
+        <DialogFooter className="sm:gap-2">
           <DialogClose asChild>
             <Button variant={"outline"} onClick={onCancelAction}>Cancel</Button>
           </DialogClose>

@@ -2,13 +2,14 @@ import PopUpNotificationBtn from '@/components/molecules/IconButton/IconButton'
 import Article from '@/components/organisms/Article'
 import NewsContainer from '@/components/templates/News/News'
 import { XIcon } from 'lucide-react'
-import TemporaryPopup from '@/components/atoms/TemporaryPopUp/TemporaryPopUp'
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
-import AlertRoot from '@/components/molecules/Alert/AlertRoot'
+import { lazy, Suspense } from 'react'
+import { AlertDescription, AlertTitle } from '@/components/ui/alert'
+const TemporaryPopup = lazy(() => import("@/components/atoms/TemporaryPopUp/TemporaryPopUp"))
 
 export default function News() {
 
     return (
+      <Suspense fallback={<div>Loading...</div>}>
         <NewsContainer heading='Lorem Ipsum'>
           <Article.Root>
 
@@ -31,7 +32,7 @@ export default function News() {
           />
           </Article.Root>
 
-          <TemporaryPopup variant='destructiv'>
+          <TemporaryPopup variant='destructive'>
             <AlertTitle>
               lorem
             </AlertTitle>
@@ -41,6 +42,6 @@ export default function News() {
           </TemporaryPopup>
 
         </NewsContainer>
-
+      </Suspense>
     )
 }

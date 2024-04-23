@@ -1,7 +1,5 @@
 import { Progress } from "@radix-ui/react-progress"
 
-import { JSX } from "react"
-
 export default function AnalisesLoading() {
 
   return (

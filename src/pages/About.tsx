@@ -1,10 +1,10 @@
-
+import { HomeSkeleton } from "@/components/templates/HomeSkeleton/HomeSkeleton";
 /**
  * v0 by Vercel.
  * @see https://v0.dev/t/ckR9peimHcc
  * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
  */
-import { Link } from "react-router-dom"
+/* import { Link } from "react-router-dom"
 
 export default function Component() {
   return (
@@ -40,7 +40,8 @@ export default function Component() {
       </div>
     </section>
   )
-}
+} */
 
 // This is the root layout component for your Next.js app.
 // Learn more: https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts#root-layout-required
+export default function About() {return <HomeSkeleton />}

@@ -3,10 +3,9 @@
  * @see https://v0.dev/t/mjOlVnIqPys
  * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
  */
-import { ChangeEvent, DragEvent, useState, useRef } from "react";
+import { ChangeEvent, DragEvent, lazy, Suspense, useRef, useState } from "react";
 
-import UploadFilesConfirmation from "./Dialog";
-
+import UploadFilesConfirmation from "./Dialog"
 import { Result } from "@/components/molecules/";
 
 import { FileIcon } from "@radix-ui/react-icons";
@@ -14,8 +13,10 @@ import { Button } from "@/components/ui/button";
 
 import serverRepository from "@/common/repository/ServerRepository";
 
-import RandomGrid from "@/components/atoms/RandomGrid/RandomGrid";
-import PopUpAlert from "@/components/molecules/Alert/Alert";
+// Lazy
+const PopUpAlert = lazy(() => import("@/components/molecules/Alert/Alert"))
+const RandomGrid = lazy(() => import("@/components/atoms/RandomGrid/RandomGrid"))
+
 
 export default function UploadFiles() {
   // Create a state to handle a drag and drop event
@@ -134,8 +135,8 @@ export default function UploadFiles() {
   console.log('Renderizou')
 
   return (
-    <>
-      <section className="flex items-center justify-center w-full min-h-[600px]">
+    <Suspense fallback={<div>Loading...</div>}>
+      <section className="flex items-center justify-center min-h-[600px] w-full">
         <label
           id="drop-zone"
           onDrop={(event) => dropHandler(event)}
@@ -233,6 +234,6 @@ export default function UploadFiles() {
         alertTitle="Analisando Amostra"
         alertDescription="Isso pode levar um tempo. Sinta-se livre para navegar em outra páginas do site. Você será avisado assim que o processo terminar."
       />
-    </>
+    </Suspense>
   );
 }

@@ -16,8 +16,9 @@ export default function ResultList( { resultData }:ResultListProps ) {
   return (
 
     <ol className="space-y-2 text-start">
-      { resultData.map(item => (
+      { resultData.map((item, idx) => (
         <ResultItem
+          key={idx}
           resultLabel={item.label}
           resultValue={item.value}
         />

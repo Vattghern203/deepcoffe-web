@@ -3,8 +3,9 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Loader } from "lucide-react";
 
 import styles from "./alert.module.css"
+import { HtmlHTMLAttributes } from "react";
 
-interface PopUpAlertProps {
+interface PopUpAlertProps extends HtmlHTMLAttributes<HTMLDivElement> {
   alertTitle: string;
   alertDescription: string;
   variant?: "destructive" | "default";
