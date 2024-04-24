@@ -37,19 +37,27 @@ export default function UploadFiles() {
 
   const imageInputRef = useRef<HTMLInputElement>(null);
 
-  const handleUpload = () => {
+  const handleUpload = async () => {
     setIsLoading(true);
 
-    mockLoading(fileStack[0])
-      .then((result) => {
-        setData(result); // Access data object here: { d1: 10, d2: 20, d3: 70 }
-      })
-      .catch((error) => {
-        console.error(error); // Handle potential errors
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+    console.log('starting ....')
+
+    setTimeout(() => {
+
+      console.log('Mocking loading...')
+      mockLoading(fileStack[0])
+        .then((result) => {
+          setData(result); // Access data object here: { d1: 10, d2: 20, d3: 70 }
+        })
+        .catch((error) => {
+          console.error(error); // Handle potential errors
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+
+    }, 4000)
+
   };
 
   const dropHandler = (event: DragEvent) => {
@@ -142,11 +150,6 @@ export default function UploadFiles() {
     console.log('Converted')
 
     return new Promise<IResultData[]>((resolve, reject) => {
-
-      setTimeout(() => {
-
-        setIsLoading(() => false)
-      }, 4000)
 
       resolve([
         {
@@ -246,7 +249,7 @@ export default function UploadFiles() {
       {data.length != 0 &&
         <Result.Root>
           <Result.ImageSection>
-            <Result.Image />
+            <Result.Image imgSrc={namedBlobs[0]}  />
           </Result.ImageSection>
 
           <Result.DataSection>
