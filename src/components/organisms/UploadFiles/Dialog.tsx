@@ -7,7 +7,7 @@ import { ImageThumb } from "@/components/molecules/"
 interface DialogProps {
   src: string,
   onCancelAction: () => void,
-  onConfirmAction: () => void
+  onConfirmAction: (() => void ) | (() => Promise<void>)
 }
 
 export default function UploadFilesConfirmation({ src, onCancelAction, onConfirmAction }: DialogProps) {

@@ -23,6 +23,7 @@
  */
 /* Basic comment */
 
+
 @keyframes fade {
   0% {
     opacity: initial;
@@ -31,4 +32,12 @@
   100% {
     opacity: 0;
   }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* CSS to disable motion goes here */
 }

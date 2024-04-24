@@ -1,6 +1,6 @@
 import ResultItem from "./ResultItem"
 
-interface IResultData {
+type IResultData = {
 
   label: string
   value: number

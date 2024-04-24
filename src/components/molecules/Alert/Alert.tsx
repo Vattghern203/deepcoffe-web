@@ -22,15 +22,15 @@ export default function PopUpAlert({
 
   return (
     isLoading && (
-      <Alert variant={variant} className={`fixed top-16 left-[50%] translate-x-[-50%] z-[100] w-fit bg-background/90 backdrop-blur-sm ${styles.alert} gap-1`}>
-        <Loader className="animate-spin self-center align-middle" />
-        <AlertTitle>
-          {alertTitle}
-        </AlertTitle>
-        <AlertDescription>
-          {alertDescription}
-        </AlertDescription>
-      </Alert>
+        <Alert variant={variant} className={`fixed top-16 left-[50%] translate-x-[-50%] z-[100] w-fit bg-background/90 backdrop-blur-sm ${styles.alert} gap-1`}>
+          <Loader className="animate-spin self-center align-middle" />
+          <AlertTitle>
+            {alertTitle}
+          </AlertTitle>
+          <AlertDescription>
+            {alertDescription}
+          </AlertDescription>
+        </Alert>
     )
   )
 }

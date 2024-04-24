@@ -36,11 +36,10 @@ export function HomeSkeleton() {
               <Skeleton
                 className="inline-flex h-9 w-[8ch] items-center justify-center rounded-md px-4"
               />
-          </div>
+            </div>
           </div>
         </section>
       </header>
-
     </>
   )
 }
