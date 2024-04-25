@@ -3,7 +3,7 @@
  * @see https://v0.dev/t/mjOlVnIqPys
  * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
  */
-import { ChangeEvent, DragEvent, lazy, Suspense, useRef, useState } from "react";
+import { ChangeEvent, DragEvent, useRef, useState } from "react";
 
 import UploadFilesConfirmation from "./Dialog"
 import { Result } from "@/components/molecules/";
@@ -188,7 +188,7 @@ export default function UploadFiles() {
           onDragLeave={() => setIsBeingDragged(false)}
           onDragEnd={() => setIsBeingDragged(false)}
           data-dragged={isBeingDragged}
-          className="w-full max-w-3xl p-4 border-2 border-dashed flex flex-col items-center justify-center gap-2 border-secondary-foreground focus-visible:outline dark:border-secondary cursor-pointer transition-all ease-in-out
+          className="w-full max-w-3xl p-4 border-2 border-dashed flex flex-col items-center justify-center gap-2 border-secondary-foreground/50 focus-visible:outline cursor-pointer transition-all ease-in-out hover:bg-secondary
           data-[dragged=true]:bg-secondary
           rounded-l has-[#file-form:focus-visible]:outline"
           htmlFor="file-form"
@@ -242,14 +242,14 @@ export default function UploadFiles() {
         <UploadFilesConfirmation
           src={namedBlobs[0]}
           onCancelAction={() => setFileStack([])}
-          onConfirmAction={() => handleUpload(mockLoading(fileStack[0]))}
+          onConfirmAction={() => handleUpload()}
         />
       )}
 
       {data.length != 0 &&
         <Result.Root>
           <Result.ImageSection>
-            <Result.Image imgSrc={namedBlobs[0]}  />
+            <Result.Image imgSrc={namedBlobs[0]} />
           </Result.ImageSection>
 
           <Result.DataSection>
