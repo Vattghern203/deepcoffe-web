@@ -15,6 +15,7 @@ import serverRepository from "@/common/repository/ServerRepository";
 
 import PopUpAlert from "@/components/molecules/Alert/Alert"
 import RandomGrid from "@/components/atoms/RandomGrid/RandomGrid"
+import { Loader } from "lucide-react";
 
 export default function UploadFiles() {
   // Create a state to handle a drag and drop event
@@ -32,8 +33,6 @@ export default function UploadFiles() {
   const [data, setData] = useState<IResultData[]>([])
 
   const [isBeingDragged, setIsBeingDragged] = useState(false)
-
-  //const fileToBeAnalised = {}
 
   const imageInputRef = useRef<HTMLInputElement>(null);
 
@@ -180,46 +179,66 @@ export default function UploadFiles() {
   return (
     <>
       <section className="flex items-center justify-center min-h-[600px] w-full">
-        <label
-          id="drop-zone"
-          role="button"
-          onDrop={(event) => dropHandler(event)}
-          onDragOver={(event) => dragOverHandler(event)}
-          onDragLeave={() => setIsBeingDragged(false)}
-          onDragEnd={() => setIsBeingDragged(false)}
-          data-dragged={isBeingDragged}
-          className="w-full max-w-3xl p-4 border-2 border-dashed flex flex-col items-center justify-center gap-2 border-secondary-foreground/50 focus-visible:outline cursor-pointer transition-all ease-in-out hover:bg-secondary
+
+        {!isLoading ?
+          (<label
+            id="drop-zone"
+            role="button"
+            onDrop={(event) => dropHandler(event)}
+            onDragOver={(event) => dragOverHandler(event)}
+            onDragLeave={() => setIsBeingDragged(false)}
+            onDragEnd={() => setIsBeingDragged(false)}
+            data-dragged={isBeingDragged}
+            className="w-full max-w-3xl p-4 border-2 border-dashed flex flex-col items-center justify-center gap-2 border-secondary-foreground/50 focus-visible:outline cursor-pointer transition-all ease-in-out hover:bg-secondary
           data-[dragged=true]:bg-secondary
           rounded-l has-[#file-form:focus-visible]:outline"
-          htmlFor="file-form"
-        >
-          <span className="h-20 flex items-center gap-2 text-2xl font-semibold">
-            <FileIcon className="w-6 h-6" />
-            <span className="font-bold">Arraste e solte seus arquivos aqui</span>
-          </span>
-          <label
-            className="text-center text-sm text-secondary-foreground"
             htmlFor="file-form"
           >
-            ou
-            <Button
-              className="ml-2 -z-10"
-              size="sm"
-              onClick={() => document.getElementById("file-form")?.click()}
+            <span className="h-20 flex items-center gap-2 text-2xl font-semibold">
+              <FileIcon className="w-6 h-6" />
+              <span className="font-bold">Arraste e solte seus arquivos aqui</span>
+            </span>
+            <label
+              className="text-center text-sm text-secondary-foreground"
+              htmlFor="file-form"
             >
-              Escolha um arquivo
-            </Button>
-            <input
-              id="file-form"
-              className="sr-only"
-              type="file"
-              ref={imageInputRef}
-              onChange={handleChange}
-              accept="image/*"
-              required
-            />
+              ou
+              <Button
+                className="ml-2 -z-10"
+                size="sm"
+                onClick={() => document.getElementById("file-form")?.click()}
+              >
+                Escolha um arquivo
+              </Button>
+              <input
+                id="file-form"
+                className="sr-only"
+                type="file"
+                ref={imageInputRef}
+                onChange={handleChange}
+                accept="image/*"
+                required
+              />
+            </label>
           </label>
-        </label>
+
+          )
+
+          :
+
+          (
+            <section className="flex items-center gap-2 w-full max-w-3xl p-4 border-2 rounded-md mx-auto fade-in-10">
+              <Loader className="animate-spin transition-transform will-change-transform" />
+
+              <article >
+                <h2 className="text-2xl font-bold">Análise em andamento</h2>
+
+                <p className="text-xl">Isso pode demorar um pouco, sinta-se livre para navegar em outras páginas do site.</p>
+              </article>
+
+            </section>
+          )
+        }
       </section>
 
       {
@@ -255,7 +274,7 @@ export default function UploadFiles() {
           <Result.DataSection>
             <Result.List
               resultData={data}
-            ></Result.List>
+            />
           </Result.DataSection>
         </Result.Root>
       }
