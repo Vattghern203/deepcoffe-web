@@ -1,9 +1,9 @@
-import { ReactNode } from "react"
+/* import { ReactNode } from "react"
 
 interface UploadRootProps {
 
   children: ReactNode
-  
+
 }
 
 export default function UploadRoot( { children }:UploadRootProps ) {
@@ -28,4 +28,4 @@ export default function UploadRoot( { children }:UploadRootProps ) {
         </label>
     </section>
   )
-}
+} */

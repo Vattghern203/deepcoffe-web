@@ -12,10 +12,10 @@ interface NavigationBarProps extends linkListProps {
   logoUrl?: string;
 }
 
-export function NavigationBar({ links, logoUrl }: NavigationBarProps) {
+export function NavigationBar({ links }: NavigationBarProps) {
   return (
     <Header>
-      <Logo logoSrc={logoUrl ? logoUrl : ""} />
+      <Logo />
       <Nav.Root>
         {links.map((item) => (
           <Nav.Link key={item.url} linkLabel={item.name} url={item.url} />

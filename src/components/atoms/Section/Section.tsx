@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+/* import { ReactNode } from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -17,4 +17,4 @@ function Section( { children }:SectionProps ) {
   )
 }
 
-export { Section }
+export { Section } */

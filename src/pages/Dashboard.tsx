@@ -12,7 +12,7 @@ export default function Dashboard() {
       <div className="flex flex-col w-64 border-r border-gray-200 dark:border-gray-800">
         <div className="flex items-center h-16 px-6 border-b">
           <Link className="flex items-center gap-2 text-lg font-semibold" to="#">
-            <Package2Icon className="w-6 h-6" />
+            <Package2Icon />
             <span className="sr-only">Acme Inc</span>
           </Link>
         </div>
@@ -22,28 +22,28 @@ export default function Dashboard() {
               className="flex items-center gap-3 h-10 px-6 text-sm font-medium text-gray-500 dark:text-gray-400"
               to="#"
             >
-              <HomeIcon className="w-4 h-4" />
+              <HomeIcon/>
               Home
             </Link>
             <Link
               className="flex items-center gap-3 h-10 px-6 text-sm font-medium text-gray-500 dark:text-gray-400"
               to="#"
             >
-              <BarChartIcon className="w-4 h-4" />
+              <BarChartIcon/>
               Analytics
             </Link>
             <Link
               className="flex items-center gap-3 h-10 px-6 text-sm font-medium text-gray-500 dark:text-gray-400"
               to="#"
             >
-              <ShoppingBagIcon className="w-4 h-4" />
+              <ShoppingBagIcon/>
               Products
             </Link>
             <Link
               className="flex items-center gap-3 h-10 px-6 text-sm font-medium text-gray-500 dark:text-gray-400"
               to="#"
             >
-              <UsersIcon className="w-4 h-4" />
+              <UsersIcon/>
               Customers
             </Link>
           </div>
@@ -52,7 +52,7 @@ export default function Dashboard() {
       <div className="flex flex-col w-full min-h-screen">
         <header className="flex items-center h-16 px-6 border-b">
           <Link className="mr-2 md:hidden" to="#">
-            <ChevronRightIcon className="w-6 h-6" />
+            <ChevronRightIcon/>
             <span className="sr-only">Toggle sidebar</span>
           </Link>
           <h1 className="text-lg font-semibold">Dashboard</h1>
@@ -62,7 +62,7 @@ export default function Dashboard() {
             <Card>
               <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
                 <CardTitle className="text-sm font-medium">Sales</CardTitle>
-                <CreditCardIcon className="w-4 h-4 text-gray-500 dark:text-gray-400" />
+                <CreditCardIcon />
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">$23,234</div>
@@ -72,7 +72,7 @@ export default function Dashboard() {
             <Card>
               <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
                 <CardTitle className="text-sm font-medium">Customers</CardTitle>
-                <UsersIcon className="w-4 h-4 text-gray-500 dark:text-gray-400" />
+                <UsersIcon  />
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">+123</div>
@@ -82,7 +82,7 @@ export default function Dashboard() {
             <Card>
               <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
                 <CardTitle className="text-sm font-medium">Activity</CardTitle>
-                <ActivityIcon className="w-4 h-4 text-gray-500 dark:text-gray-400" />
+                <ActivityIcon  />
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">+234</div>
@@ -92,7 +92,7 @@ export default function Dashboard() {
             <Card>
               <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
                 <CardTitle className="text-sm font-medium">Orders</CardTitle>
-                <PackageIcon className="w-4 h-4 text-gray-500 dark:text-gray-400" />
+                <PackageIcon  />
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">+234</div>
@@ -106,7 +106,7 @@ export default function Dashboard() {
   )
 }
 
-function ActivityIcon(props) {
+function ActivityIcon(props:object) {
   return (
     <svg
       {...props}

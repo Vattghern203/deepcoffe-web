@@ -1,7 +1,7 @@
-
+/*
 interface UploadInputProps {
 
-  
+
 }
 
 export default function UploadInput() {
@@ -18,4 +18,4 @@ export default function UploadInput() {
       required
     />
   )
-}
+} */
