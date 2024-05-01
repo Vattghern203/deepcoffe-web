@@ -36,7 +36,14 @@ export default function UploadFiles() {
 
   const imageInputRef = useRef<HTMLInputElement>(null);
 
+  const sampleImage = fileStack[fileStack.length -1] ? fileStack[fileStack.length -1] : null
+
+  console.log(sampleImage)
+
   const handleUpload = async () => {
+
+    renewUpload()
+
     setIsLoading(true);
 
     console.log('starting ....')
@@ -85,6 +92,8 @@ export default function UploadFiles() {
         console.log(`... file[${i}].name = ${file.name}`);
       });
     }
+
+    setIsBeingDragged(false)
   };
 
   const dragOverHandler = (event: DragEvent) => {
@@ -130,8 +139,6 @@ export default function UploadFiles() {
   const handleImage = async (img: File) => {
     const base64 = await convertBlobToBase64(img);
 
-    fileStack.pop();
-
     const res = await fetchAPI(base64.replace("data:", "").replace(/^.+,/, ""));
     console.log(res);
   };
@@ -174,6 +181,13 @@ export default function UploadFiles() {
     })
   }
 
+  const renewUpload = () => {
+
+    setData([])
+
+    console.log('Novo Upload')
+  }
+
   console.log('Renderizou')
 
   return (
@@ -187,16 +201,18 @@ export default function UploadFiles() {
             onDrop={(event) => dropHandler(event)}
             onDragOver={(event) => dragOverHandler(event)}
             onDragLeave={() => setIsBeingDragged(false)}
-            onDragEnd={() => setIsBeingDragged(false)}
+            //onDragEnd={() => setIsBeingDragged(false)}
             data-dragged={isBeingDragged}
             className="w-full max-w-3xl p-4 border-2 border-dashed flex flex-col items-center justify-center gap-2 border-secondary-foreground/50 focus-visible:outline cursor-pointer transition-all ease-in-out hover:bg-secondary
           data-[dragged=true]:bg-secondary
-          rounded-l has-[#file-form:focus-visible]:outline"
+          rounded-l has-[#file-form:focus-visible]:outline fade-in-25"
             htmlFor="file-form"
           >
             <span className="h-20 flex items-center gap-2 text-2xl font-semibold">
               <FileIcon className="w-6 h-6" />
-              <span className="font-bold">Arraste e solte seus arquivos aqui</span>
+              <span className="font-bold">
+                Arraste e solte seus arquivos aqui
+              </span>
             </span>
             <label
               className="text-center text-sm text-secondary-foreground"
@@ -259,7 +275,7 @@ export default function UploadFiles() {
 
       {namedBlobs.length !== 0 && (
         <UploadFilesConfirmation
-          src={namedBlobs[0]}
+          src={namedBlobs[namedBlobs.length - 1]}
           onCancelAction={() => setFileStack([])}
           onConfirmAction={() => handleUpload()}
         />
@@ -268,7 +284,7 @@ export default function UploadFiles() {
       {data.length != 0 &&
         <Result.Root>
           <Result.ImageSection>
-            <Result.Image imgSrc={namedBlobs[0]} />
+            <Result.Image imgSrc={namedBlobs[namedBlobs.length - 1]} />
           </Result.ImageSection>
 
           <Result.DataSection>

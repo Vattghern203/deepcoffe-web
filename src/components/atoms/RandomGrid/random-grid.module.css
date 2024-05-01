@@ -7,8 +7,6 @@
   align-self: center;
   position: relative;
 
-  height: 80dvmin;
-
   &:empty { display: none; }
 
   /* &::after {

@@ -16,7 +16,7 @@ export default function RandomGrid( { children, cols=3 }:RandomGridProps ) {
           <h2 className="text-2xl font-bold mb-2 text-start self-start">Uploaded Images</h2>
 
           <section
-            className={`${styles.random_grid} w-full max-w-3xl overflow-y-auto mx-auto gap-1 p-1 rounded-md bg-card border after:w-full after:h-[20%] after:absolute after:left-[50%] after:translate-x-[-50%] after:bottom-[20%] after:bg-gradient-to-t after:gradient after:from-card after:to-transparent`}
+            className={`${styles.random_grid} py-6 px-4 w-full max-w-3xl overflow-y-auto mx-auto gap-1 rounded-md bg-card border after:w-full after:h-[30%] after:absolute after:left-[50%] after:translate-x-[-50%] after:bottom-[62%] after:bg-gradient-to-t after:gradient after:from-card after:to-transparent`}
             style={
               {
                 columnCount: cols
