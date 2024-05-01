@@ -8,6 +8,7 @@ import './header.module.css'
 
 import { Link } from "react-router-dom"
 import { ModeToggle } from "@/components/mode-toggle"
+import { Logo } from '@/components/atoms/Icons/Logo'
 
 export default function Component() {
   return (
@@ -15,17 +16,11 @@ export default function Component() {
       <section className="px-4 md:px-6">
         <div className="flex h-14 items-center justify-between">
           <Link className="mr-6" to="/">
-            <img
-              alt="Logo"
-              className="h-6 w-6 rounded-full"
-              height="32"
-              src="https://c4.wallpaperflare.com/wallpaper/950/884/848/anime-girls-icons-profile-hd-wallpaper-thumb.jpg"
-              style={{
-                aspectRatio: "32/32",
-                objectFit: "cover",
-              }}
-              width="32"
-            />
+            <Logo className='stroke-primary hover:stroke-primary/50 focus-within:ring-primary/50 transition-colors' height={32} width={32} style={{
+              aspectRatio: "32/32",
+              objectFit: "cover",
+              objectPosition: "center"
+            }} />
           </Link>
           <nav className="flex-1">
             <ul  className="flex justify-center gap-6 items-center">

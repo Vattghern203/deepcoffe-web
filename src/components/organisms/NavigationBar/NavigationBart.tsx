@@ -1,4 +1,4 @@
-import { Logo } from "@/components/atoms/Logo/Logo";
+import { Logo } from "@/components/atoms/Icons/Logo";
 import { Header } from "../Header";
 import Nav from "../Nav";
 

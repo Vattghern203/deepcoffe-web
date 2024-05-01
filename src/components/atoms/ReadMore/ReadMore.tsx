@@ -1,7 +1,5 @@
 import { ChevronRightIcon } from "../Icons/ChevronRightIcon"
 
-import './ReadMore.module.css'
-
 export function ReadMore() {
 
     return (
