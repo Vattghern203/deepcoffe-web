@@ -5,7 +5,7 @@
  */
 import { ChangeEvent, DragEvent, useRef, useState } from "react";
 
-import UploadFilesConfirmation from "./Dialog"
+import UploadFilesConfirmation from "./UploadFilesConfirmation"
 import { Result } from "@/components/molecules/";
 
 import { FileIcon } from "@radix-ui/react-icons";
@@ -259,10 +259,11 @@ export default function UploadFiles() {
 
       {
         namedBlobs.length !== 0 && (
-          <RandomGrid>
+          <RandomGrid uploadCount={namedBlobs.length}>
             {namedBlobs.map((elem) => (
               <img
                 loading="lazy"
+                title={elem}
                 className="rounded-md"
                 src={elem}
                 alt="Sample Image"
@@ -273,9 +274,10 @@ export default function UploadFiles() {
         )
       }
 
-      {namedBlobs.length !== 0 && (
+      {fileStack.length !== 0 && (
         <UploadFilesConfirmation
-          src={namedBlobs[namedBlobs.length - 1]}
+          uploadCount={namedBlobs.length}
+          src={namedBlobs}
           onCancelAction={() => setFileStack([])}
           onConfirmAction={() => handleUpload()}
         />
@@ -284,7 +286,7 @@ export default function UploadFiles() {
       {data.length != 0 &&
         <Result.Root>
           <Result.ImageSection>
-            <Result.Image imgSrc={namedBlobs[namedBlobs.length - 1]} />
+            <Result.Image imgSrc={namedBlobs[0]} />
           </Result.ImageSection>
 
           <Result.DataSection>
