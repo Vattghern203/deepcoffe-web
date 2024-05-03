@@ -13,7 +13,6 @@ import { Button } from "@/components/ui/button";
 
 import serverRepository from "@/common/repository/ServerRepository";
 
-import PopUpAlert from "@/components/molecules/Alert/Alert"
 import RandomGrid from "@/components/atoms/RandomGrid/RandomGrid"
 import { Loader } from "lucide-react";
 
@@ -284,7 +283,7 @@ export default function UploadFiles() {
       )}
 
       {data.length != 0 &&
-        <Result.Root>
+        <Result.Root onCloseAction={() => setFileStack([])}>
           <Result.ImageSection>
             <Result.Image imgSrc={namedBlobs[0]} />
           </Result.ImageSection>
@@ -296,12 +295,6 @@ export default function UploadFiles() {
           </Result.DataSection>
         </Result.Root>
       }
-
-      <PopUpAlert
-        isLoading={isLoading}
-        alertTitle="Analisando Amostra"
-        alertDescription="Isso pode levar um tempo. Sinta-se livre para navegar em outra páginas do site. Você será avisado assim que o processo terminar."
-      />
     </>
   );
 }

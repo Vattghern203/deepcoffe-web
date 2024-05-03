@@ -14,8 +14,6 @@ interface DialogProps {
 
 export default function UploadFilesConfirmation({ src, uploadCount, onCancelAction, onConfirmAction }: DialogProps) {
 
-  //const [isOpen, setIsOpen] = useToggle(false)
-
   return (
 
     <Dialog defaultOpen>
