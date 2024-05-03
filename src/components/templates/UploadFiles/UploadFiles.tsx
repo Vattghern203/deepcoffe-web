@@ -11,7 +11,7 @@ import { Result } from "@/components/molecules/";
 import { FileIcon } from "@radix-ui/react-icons";
 import { Button } from "@/components/ui/button";
 
-import serverRepository from "@/common/repository/ServerRepository";
+//import serverRepository from "@/common/repository/ServerRepository";
 
 import RandomGrid from "@/components/atoms/RandomGrid/RandomGrid"
 import { Loader } from "lucide-react";
@@ -131,7 +131,7 @@ export default function UploadFiles() {
     });
   };
 
-  const fetchAPI = async (image: string) => {
+  /* const fetchAPI = async (image: string) => {
     return await serverRepository.post("classify", { image });
   };
 
@@ -140,7 +140,7 @@ export default function UploadFiles() {
 
     const res = await fetchAPI(base64.replace("data:", "").replace(/^.+,/, ""));
     console.log(res);
-  };
+  }; */
 
   const namedBlobs = fileStack.map((item) => createNamedBlob(item));
   //fileStack.forEach((item) => convertBlobToBase64(item))
@@ -152,7 +152,7 @@ export default function UploadFiles() {
 
     const base64 = await convertBlobToBase64(image)
 
-    console.log('Converted')
+    console.log('Converted', base64)
 
     return new Promise<IResultData[]>((resolve, reject) => {
 
