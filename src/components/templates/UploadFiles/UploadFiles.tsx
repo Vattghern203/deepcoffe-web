@@ -207,7 +207,9 @@ export default function UploadFiles() {
           rounded-l has-[#file-form:focus-visible]:outline fade-in-25"
             htmlFor="file-form"
           >
-            <span className="h-20 flex items-center gap-2 text-2xl font-semibold">
+            <span
+              className="h-20 flex items-center gap-2 text-2xl font-semibold"
+            >
               <FileIcon className="w-6 h-6" />
               <span className="font-bold">
                 Arraste e solte seus arquivos aqui

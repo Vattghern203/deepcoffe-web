@@ -17,7 +17,8 @@ export default function RandomGrid({ children, uploadCount, cols = 3, buttonLabe
   return (
 
     <section className="flex flex-col justify-center items-center mb-10 max-h-[600px]">
-      <div className="max-h-[600px] relative overflow-clip after:w-full after:h-[50%] after:absolute after:left-[50%] after:translate-x-[-50%] after:bottom-0 after:bg-gradient-to-t after:gradient after:from-card after:to-transparent group">
+      <div className={`
+       max-h-[600px] relative overflow-clip after:w-full after:h-[50%] after:absolute after:left-[50%] after:translate-x-[-50%] after:bottom-0 after:bg-gradient-to-t after:gradient after:from-card after:to-transparent group ${styles.content_wrapper}`}>
         <h2 className="text-2xl font-bold mb-2 text-start self-start align-middle flex items-end">Uploaded Images
           <span className="font-medium text-base ml-1">{`(${uploadCount})`}</span>
         </h2>
@@ -35,7 +36,7 @@ export default function RandomGrid({ children, uploadCount, cols = 3, buttonLabe
           </section>
         </div>
 
-        <Button className="absolute left-[50%] translate-x-[-50%]  opacity-0 group-hover:top-0">
+        <Button className="absolute left-[50%] translate-x-[-50%] top-[80%] opacity-0 transition-all z-20">
           {buttonLabel}
         </Button>
 

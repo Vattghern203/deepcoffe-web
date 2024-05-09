@@ -1,4 +1,4 @@
-@import url(../../../assets/css/global.css);
+@import url(../../../assets/css/_animation.css);
 
 .random_grid {
 
@@ -33,5 +33,23 @@
 
     margin-bottom: .25rem;
 
+  }
+}
+
+
+.content_wrapper {
+
+  &:hover,
+  & * :is(:hover) {
+
+    & > button {
+
+      top: 70%;
+
+      will-change: top;
+      animation: fade .8s ease-in 1 reverse forwards;
+
+      transition: top ease-in .2s;
+    }
   }
 }
