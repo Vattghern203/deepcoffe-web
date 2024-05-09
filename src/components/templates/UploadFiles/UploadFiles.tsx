@@ -3,18 +3,16 @@
  * @see https://v0.dev/t/mjOlVnIqPys
  * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
  */
-import { ChangeEvent, DragEvent, useRef, useState } from "react";
+import { useState } from "react";
 
 import UploadFilesConfirmation from "./UploadFilesConfirmation"
 import { Result } from "@/components/molecules/";
-
-import { FileIcon } from "@radix-ui/react-icons";
-import { Button } from "@/components/ui/button";
 
 //import serverRepository from "@/common/repository/ServerRepository";
 
 import RandomGrid from "@/components/atoms/RandomGrid/RandomGrid"
 import { Loader } from "lucide-react";
+import Dropzone from "@/components/organisms/Dropzone/Dropzone";
 
 export default function UploadFiles() {
   // Create a state to handle a drag and drop event
@@ -32,8 +30,6 @@ export default function UploadFiles() {
   const [data, setData] = useState<IResultData[]>([])
 
   const [isBeingDragged, setIsBeingDragged] = useState(false)
-
-  const imageInputRef = useRef<HTMLInputElement>(null);
 
   const sampleImage = fileStack[fileStack.length -1] ? fileStack[fileStack.length -1] : null
 
@@ -64,50 +60,6 @@ export default function UploadFiles() {
     }, 4000)
 
   };
-
-  const dropHandler = (event: DragEvent) => {
-    console.log("File(s) dropped");
-
-    event?.preventDefault();
-
-    if (event.dataTransfer && event.dataTransfer.items) {
-      [...event.dataTransfer.items].forEach((item: DataTransferItem, i) => {
-        if (item.kind === "file") {
-          const file = item.getAsFile();
-
-          if (file && file.type.startsWith("image/")) {
-            console.log(file.type);
-
-            setFileStack((prevStack) => [...prevStack, file]);
-
-            console.log("fileStack", fileStack);
-
-            console.log(`... file[${i}].name = ${file?.name}`);
-          }
-        }
-      });
-    } else {
-      [...event.dataTransfer.files].forEach((file, i) => {
-        console.log(`... file[${i}].name = ${file.name}`);
-      });
-    }
-
-    setIsBeingDragged(false)
-  };
-
-  const dragOverHandler = (event: DragEvent) => {
-    event.preventDefault();
-
-    setIsBeingDragged(true)
-  }
-
-
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = event.target.files?.[0];
-
-    selectedFile ? setFileStack((prev) => [...prev, selectedFile]) : null;
-  };
-
 
   const createNamedBlob = (file: File) => {
     const namedBlob = URL.createObjectURL(file);
@@ -194,50 +146,14 @@ export default function UploadFiles() {
       <section className="flex items-center justify-center min-h-[600px] w-full">
 
         {!isLoading ?
-          (<label
-            id="drop-zone"
-            role="button"
-            onDrop={(event) => dropHandler(event)}
-            onDragOver={(event) => dragOverHandler(event)}
-            onDragLeave={() => setIsBeingDragged(false)}
-            //onDragEnd={() => setIsBeingDragged(false)}
-            data-dragged={isBeingDragged}
-            className="w-full max-w-3xl p-4 border-2 border-dashed flex flex-col items-center justify-center gap-2 border-secondary-foreground/50 focus-visible:outline cursor-pointer transition-all ease-in-out hover:bg-secondary
-          data-[dragged=true]:bg-secondary
-          rounded-l has-[#file-form:focus-visible]:outline fade-in-25"
-            htmlFor="file-form"
-          >
-            <span
-              className="h-20 flex items-center gap-2 text-2xl font-semibold"
-            >
-              <FileIcon className="w-6 h-6" />
-              <span className="font-bold">
-                Arraste e solte seus arquivos aqui
-              </span>
-            </span>
-            <label
-              className="text-center text-sm text-secondary-foreground"
-              htmlFor="file-form"
-            >
-              ou
-              <Button
-                className="ml-2 -z-10"
-                size="sm"
-                onClick={() => document.getElementById("file-form")?.click()}
-              >
-                Escolha um arquivo
-              </Button>
-              <input
-                id="file-form"
-                className="sr-only"
-                type="file"
-                ref={imageInputRef}
-                onChange={handleChange}
-                accept="image/*"
-                required
-              />
-            </label>
-          </label>
+          (
+            <Dropzone
+              fileStack={fileStack}
+              setFileStack={setFileStack}
+              isLoading={isLoading}
+              isBeingDragged={isBeingDragged}
+              setIsBeingDragged={setIsBeingDragged}
+            />
 
           )
 
