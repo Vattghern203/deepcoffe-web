@@ -1,4 +1,4 @@
-import { ReadMore } from "@/components/atoms/ReadMore/ReadMore"
+import { ReadMore } from "@/components/atoms/"
 
 interface ArticleBodyProps {
 

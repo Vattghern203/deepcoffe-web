@@ -1,7 +1,9 @@
 import { ReactNode } from "react"
 
-import styles from "./random-grid.module.css"
 import { Button } from "@/components/ui/button"
+
+import styles from "./random-grid.module.css"
+
 
 interface RandomGridProps {
   children: ReactNode
@@ -10,9 +12,9 @@ interface RandomGridProps {
   cols?: number
 }
 
-export default function RandomGrid({ children, uploadCount, cols = 3, buttonLabel="Abrir Galeria" }: RandomGridProps) {
+export default function RandomGrid({ children, uploadCount, cols = 3, buttonLabel = "Abrir Galeria" }: RandomGridProps) {
 
-  uploadCount === 1 ? buttonLabel="Analisar Imagem" : buttonLabel="Abrir Galeria"
+  uploadCount === 1 ? buttonLabel = "Analisar Imagem" : buttonLabel = "Abrir Galeria"
 
   return (
 

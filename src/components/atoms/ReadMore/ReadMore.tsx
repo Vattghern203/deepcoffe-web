@@ -1,15 +1,23 @@
 import { ChevronRightIcon } from "../Icons/ChevronRightIcon"
 
-export function ReadMore() {
+
+interface ReadMoreProps {
+
+  text?: string
+}
+
+function ReadMore({ text }:ReadMoreProps) {
 
     return (
 
         <a
-          className="font-semibold inline-flex items-center  space-x-2"
+          className="font-semibold inline-flex items-center space-x-2"
           href="#"
         >
-              <span>Read more</span>
+              <span>{text || 'Read more'}</span>
               <ChevronRightIcon className="w-4 h-4" />
         </a>
     )
 }
+
+export default ReadMore

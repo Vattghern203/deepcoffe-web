@@ -1,5 +1,7 @@
-import { Alert } from "@/components/ui/alert"
 import { ReactNode } from "react"
+
+import { Alert } from "@/components/ui/alert"
+
 
 interface AlertRootProps {
 
@@ -8,7 +10,7 @@ interface AlertRootProps {
   children: ReactNode
 }
 
-export default function AlertRoot( { showingCondition, variant="default", children }:AlertRootProps ) {
+function AlertRoot({ showingCondition, variant = "default", children }: AlertRootProps) {
 
   return (
     showingCondition && (
@@ -18,3 +20,5 @@ export default function AlertRoot( { showingCondition, variant="default", childr
     )
   )
 }
+
+export default AlertRoot

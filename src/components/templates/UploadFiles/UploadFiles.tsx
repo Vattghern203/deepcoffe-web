@@ -3,16 +3,15 @@
  * @see https://v0.dev/t/mjOlVnIqPys
  * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
  */
+
 import { useState } from "react";
+import { Loader } from "lucide-react";
 
 import UploadFilesConfirmation from "./UploadFilesConfirmation"
 import { Result } from "@/components/molecules/";
 
-//import serverRepository from "@/common/repository/ServerRepository";
-
 import RandomGrid from "@/components/atoms/RandomGrid/RandomGrid"
-import { Loader } from "lucide-react";
-import Dropzone from "@/components/organisms/Dropzone/Dropzone";
+import { Dropzone } from "@/components/organisms/";
 
 export default function UploadFiles() {
   // Create a state to handle a drag and drop event

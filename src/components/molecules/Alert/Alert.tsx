@@ -1,9 +1,10 @@
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { HtmlHTMLAttributes } from "react"
+import { Loader } from "lucide-react"
 
-import { Loader } from "lucide-react";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 
 import styles from "./alert.module.css"
-import { HtmlHTMLAttributes } from "react";
+
 
 interface PopUpAlertProps extends HtmlHTMLAttributes<HTMLDivElement> {
   alertTitle: string;
@@ -13,7 +14,7 @@ interface PopUpAlertProps extends HtmlHTMLAttributes<HTMLDivElement> {
   hasActions?: boolean
 }
 
-export default function PopUpAlert({
+function PopUpAlert({
   alertTitle,
   alertDescription,
   variant = "default",
@@ -22,15 +23,17 @@ export default function PopUpAlert({
 
   return (
     isLoading && (
-        <Alert variant={variant} className={`fixed top-16 left-[50%] translate-x-[-50%] z-[100] w-fit bg-background/90 backdrop-blur-sm ${styles.alert} gap-1`}>
-          <Loader className="animate-spin self-center align-middle" />
-          <AlertTitle>
-            {alertTitle}
-          </AlertTitle>
-          <AlertDescription>
-            {alertDescription}
-          </AlertDescription>
-        </Alert>
+      <Alert variant={variant} className={`fixed top-16 left-[50%] translate-x-[-50%] z-[100] w-fit bg-background/90 backdrop-blur-sm ${styles.alert} gap-1`}>
+        <Loader className="animate-spin self-center align-middle" />
+        <AlertTitle>
+          {alertTitle}
+        </AlertTitle>
+        <AlertDescription>
+          {alertDescription}
+        </AlertDescription>
+      </Alert>
     )
   )
 }
+
+export default PopUpAlert

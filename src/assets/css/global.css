@@ -4,6 +4,13 @@
 
 html {
   color-scheme: dark light;
+  scrollbar-gutter: stable;
+  scroll-behavior: smooth;
+}
+
+body {
+
+  overflow-y: scroll;
 }
 
 /* Default Theme (Zinc) */

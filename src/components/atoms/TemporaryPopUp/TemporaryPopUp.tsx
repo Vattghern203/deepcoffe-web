@@ -4,6 +4,7 @@ import { Alert } from '@/components/ui/alert';
 
 import styles from "./temporary-popup.module.css"
 
+
 interface PopupProps {
   variant?: "default" | "destructive"
   children: ReactNode

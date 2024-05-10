@@ -1,16 +1,17 @@
-import { ChangeEvent, Dispatch, DragEvent, LabelHTMLAttributes, SetStateAction, useRef } from 'react';
+import { ChangeEvent, Dispatch, DragEvent, LabelHTMLAttributes, SetStateAction, useRef } from 'react'
 
-import FileIcon from '@/components/atoms/Icons/FileIcon';
+import FileIcon from '@/components/atoms/Icons/FileIcon'
 
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/button'
 
 interface DropzoneProps extends LabelHTMLAttributes<HTMLLabelElement> {
   fileStack: File[];
   setFileStack: Dispatch<SetStateAction<File[]>>
-  isLoading: boolean;
+  isLoading: boolean
   isBeingDragged: boolean
-  setIsBeingDragged: Dispatch<SetStateAction<boolean>>;
+  setIsBeingDragged: Dispatch<SetStateAction<boolean>>
 }
+
 function Dropzone({
   fileStack,
   setFileStack,
@@ -41,19 +42,20 @@ function Dropzone({
     }
 
     setIsBeingDragged(false);
-  };
+  }
 
   const dragOverHandler = (event: DragEvent) => {
     event.preventDefault();
     setIsBeingDragged(true);
-  };
+  }
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const selectedFile = event.target.files?.[0];
     selectedFile ? setFileStack((prev) => [...prev, selectedFile]) : null;
-  };
+  }
 
   return (
+    
     <label
       id="dropzone"
       role="button"
@@ -86,10 +88,10 @@ function Dropzone({
         onChange={handleChange}
         accept="image/*"
         required
-        disabled={isLoading || fileStack.length > 0} // Disable input while processing or with files selected
+        disabled={isLoading || fileStack.length > 0}
       />
     </label>
-  );
+  )
 }
 
 export default Dropzone;

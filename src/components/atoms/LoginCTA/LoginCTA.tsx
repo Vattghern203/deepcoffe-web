@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom'
 
+
 interface LoginCTAProps {
 
   label?: string
 }
 
-export function LoginCTA( { label='Login' }:LoginCTAProps ) {
+function LoginCTA( { label='Login' }:LoginCTAProps ) {
 
   return (
 
@@ -23,3 +24,5 @@ export function LoginCTA( { label='Login' }:LoginCTAProps ) {
     </div>
   )
 }
+
+export default LoginCTA

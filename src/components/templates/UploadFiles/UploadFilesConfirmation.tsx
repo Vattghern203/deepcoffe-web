@@ -1,15 +1,31 @@
-import { Button } from "@/components/ui/button"
-import { Dialog, DialogHeader, DialogTitle, DialogDescription, DialogContent, DialogFooter, DialogClose } from "@/components/ui/dialog"
 import { ImageThumb } from "@/components/molecules/"
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
 
-//import { useToggle } from "@/hooks/useToggle"
+import { Button } from "@/components/ui/button"
+
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious
+} from "@/components/ui/carousel"
+
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle
+} from "@/components/ui/dialog"
+
 
 interface DialogProps {
   src: string[],
   uploadCount: number
   onCancelAction: () => void,
-  onConfirmAction: (() => void ) | (() => Promise<void>)
+  onConfirmAction: (() => void) | (() => Promise<void>)
 }
 
 export default function UploadFilesConfirmation({ src, uploadCount, onCancelAction, onConfirmAction }: DialogProps) {
@@ -28,23 +44,23 @@ export default function UploadFilesConfirmation({ src, uploadCount, onCancelActi
 
         {uploadCount == 1
 
-        ?
+          ?
 
-        <ImageThumb src={src[0]} altText="Image to be analysed." />
+          <ImageThumb src={src[0]} altText="Image to be analysed." />
 
-        :
+          :
 
-        <Carousel>
-          <CarouselContent>
-            {src.map((element, index) => (
-              <CarouselItem>
-                <ImageThumb src={element} key={index} altText="Image to be analysed." />
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
-        </Carousel>
+          <Carousel>
+            <CarouselContent>
+              {src.map((element, index) => (
+                <CarouselItem>
+                  <ImageThumb src={element} key={index} altText="Image to be analysed." />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
 
         }
 
