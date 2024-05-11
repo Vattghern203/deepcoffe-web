@@ -5,7 +5,7 @@ interface NewsProps {
   heading?: string
 }
 
-export default function News({ children, heading }: NewsProps) {
+export default function NewsContainer({ children, heading }: NewsProps) {
 
   return (
 

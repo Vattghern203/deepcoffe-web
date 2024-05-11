@@ -1,9 +1,12 @@
-import PopUpNotificationBtn from '@/components/molecules/IconButton/IconButton'
-import Article from '@/components/organisms/Article'
-import NewsContainer from '@/components/templates/News/News'
-import { XIcon } from 'lucide-react'
 import { lazy, Suspense } from 'react'
+import { XIcon } from 'lucide-react'
+
 import { AlertDescription, AlertTitle } from '@/components/ui/alert'
+
+import { IconButton } from '@/components/molecules/'
+import { Article } from '@/components/organisms/'
+import { NewsContainer } from '@/components/templates/'
+
 const TemporaryPopup = lazy(() => import("@/components/atoms/TemporaryPopUp/TemporaryPopUp"))
 
 export default function News() {
@@ -25,7 +28,7 @@ export default function News() {
 
             />
 
-          <PopUpNotificationBtn
+          <IconButton
             icon={XIcon}
             iconLabel='close'
             onClickAction={() => console.log('Cliquei')}
