@@ -1,3 +1,14 @@
+# Tech Stack
+
+- shadcn/ui 🔺
+- react-hook-form  📋
+- react-router-dom ⚛
+- tailwindcss 🍃
+- zod 💎
+- lucide-react 🌀
+- zustand 🐻
+- styled-components 💅
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.

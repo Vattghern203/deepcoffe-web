@@ -175,7 +175,11 @@ export default function UploadFiles() {
 
       {
         namedBlobs.length !== 0 && (
-          <RandomGrid uploadCount={namedBlobs.length}>
+          <RandomGrid
+            uploadCount={namedBlobs.length}
+            isLoading={isLoading}
+            onClickAction={() => console.log('WORKED')}
+          >
             {namedBlobs.map((elem) => (
               <img
                 loading="lazy"

@@ -54,7 +54,11 @@ export default function UploadFilesConfirmation({ src, uploadCount, onCancelActi
             <CarouselContent>
               {src.map((element, index) => (
                 <CarouselItem>
-                  <ImageThumb src={element} key={index} altText="Image to be analysed." />
+                  <ImageThumb
+                    src={element}
+                    key={index}
+                    altText="Image to be analysed."
+                  />
                 </CarouselItem>
               ))}
             </CarouselContent>
