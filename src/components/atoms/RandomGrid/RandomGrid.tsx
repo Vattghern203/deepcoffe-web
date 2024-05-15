@@ -1,11 +1,8 @@
-import { ReactNode, SetStateAction, useRef, useState } from "react";
+import { ReactNode } from "react";
 
 import { Button } from "@/components/ui/button";
 
 import styles from "./random-grid.module.css";
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogTitle } from "@/components/ui/dialog";
-import { DialogHeader, DialogClose } from "@/components/ui/dialog";
-import { ImageThumb } from "@/components/molecules";
 
 type GalleryBtnVariantType = {
   buttonLabel: "Analisar Imagem" | "Abrir Galeria";
@@ -21,24 +18,14 @@ interface RandomGridProps {
 }
 
 export default function RandomGrid({ children, uploadCount, cols = 3, isLoading, onClickAction }: RandomGridProps) {
-  const [galleryOpen, setGalleryOpen] = useState(false);
+
 
   const btnVariantCheck = uploadCount === 1 ? 1 : 0;
-
-  const handleOpenGallery = () => {
-    setGalleryOpen(true); // Open the gallery dialog
-  };
-
-  const handleCloseGallery = () => {
-    setGalleryOpen(false); // Close the gallery dialog
-  };
-
-  console.log('GALLERY STATE', galleryOpen)
 
   const btnVariants: GalleryBtnVariantType[] = [
     {
       buttonLabel: "Abrir Galeria",
-      onClickFn: handleOpenGallery,
+      onClickFn: onClickAction,
     },
     {
       buttonLabel: "Analisar Imagem",
@@ -79,7 +66,7 @@ export default function RandomGrid({ children, uploadCount, cols = 3, isLoading,
   );
 }
 
-interface ModalGalleryProps {
+/* interface ModalGalleryProps {
 
   imgArray: string[]
   isOpen: boolean
@@ -125,4 +112,4 @@ function ModalGallery({ imgArray, isOpen, onOpenChangeFn, galleryTitle, galleryD
       </DialogContent>
     </Dialog>
   )
-}
+} */

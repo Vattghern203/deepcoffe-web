@@ -12,7 +12,7 @@ function SampleGalleryFooter( { closeBtnText }:SampleGalleryFooterProps ) {
   return (
 
     <DialogFooter>
-      <DialogClose asChild>
+      <DialogClose asChild >
         <Button className="w-full">{closeBtnText}</Button>
       </DialogClose>
     </DialogFooter>

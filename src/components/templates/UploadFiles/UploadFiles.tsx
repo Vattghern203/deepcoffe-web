@@ -33,7 +33,7 @@ export default function UploadFiles() {
 
   const [isBeingDragged, setIsBeingDragged] = useState(false)
 
-  const sampleImage = fileStack[fileStack.length -1] ? fileStack[fileStack.length -1] : null
+  const sampleImage = fileStack[fileStack.length - 1] ? fileStack[fileStack.length - 1] : null
 
   console.log(sampleImage)
 
@@ -197,7 +197,7 @@ export default function UploadFiles() {
         )
       }
 
-      <SampleGallery.Root isOpen={showGallery} onOpenChangeFn={() => setShowGallery(true)} setIsOpen={setShowGallery}>
+      <SampleGallery.Root isOpen={showGallery} onOpenChangeFn={() => setShowGallery(false)} setIsOpen={setShowGallery}>
         <SampleGallery.Header
           galleryTitle="Uploads"
           galleryDescription="Selecione uma das imagens para a análise"

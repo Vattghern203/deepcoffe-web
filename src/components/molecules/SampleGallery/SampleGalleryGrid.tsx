@@ -8,7 +8,7 @@ function SampleGalleryGrid( {imgArray}:SampleGalleryGridProps ) {
 
   return (
 
-    <div className={`h-80 w-full items-start justify-start gap-2 overflow-y-scroll flex flex-wrap`}>
+    <div className={`h-80 w-full items-start justify-start gap-2 overflow-y-scroll flex flex-wrap snap-mandatory p-0 m-0`}>
           {
             imgArray.map((itemSrc, idx) => (
               <ImageThumb
