@@ -1,4 +1,4 @@
-import { ReactNode, useRef, useState } from "react";
+import { ReactNode, SetStateAction, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 
@@ -76,36 +76,54 @@ export default function RandomGrid({ children, uploadCount, cols = 3, isLoading,
         </div>
       </section>
 
-      <Dialog open={galleryOpen} onOpenChange={handleCloseGallery}>
-        <DialogContent className="max-w-[60%] overflow-clip">
-          <DialogHeader>
-            <DialogTitle>
-              Galeria de Uploads
-            </DialogTitle>
-
-            <DialogDescription>
-              Selecione uma das imagens abaixo para ser analisada
-            </DialogDescription>
-
-          </DialogHeader>
-
-          <div className={`h-80 w-full items-start justify-start gap-2 overflow-y-scroll flex flex-wrap`}>
-            <ImageThumb src="https://source.unsplash.com/random/a"/>
-            <ImageThumb src="https://source.unsplash.com/random/b"/>
-            <ImageThumb src="https://source.unsplash.com/random/c"/>
-            <ImageThumb src="https://source.unsplash.com/random/d"/>
-            <ImageThumb src="https://source.unsplash.com/random/e"/>
-          </div>
-
-
-          <DialogFooter>
-            <DialogClose asChild>
-              <Button className="w-full">Fechar</Button>
-            </DialogClose>
-          </DialogFooter>
-
-        </DialogContent>
-      </Dialog>
     </>
   );
+}
+
+interface ModalGalleryProps {
+
+  imgArray: string[]
+  isOpen: boolean
+  setIsOpen: SetStateAction<boolean>
+  onOpenChangeFn: () => void
+  galleryTitle: string
+  galleryDescription: string
+}
+
+function ModalGallery({ imgArray, isOpen, onOpenChangeFn, galleryTitle, galleryDescription }: ModalGalleryProps) {
+
+  return (
+    <Dialog open={isOpen} onOpenChange={onOpenChangeFn}>
+      <DialogContent className="max-w-[60%] overflow-clip">
+        <DialogHeader>
+          <DialogTitle>
+            {galleryTitle}
+          </DialogTitle>
+
+          <DialogDescription>
+            {galleryDescription}
+          </DialogDescription>
+
+        </DialogHeader>
+
+        <div className={`h-80 w-full items-start justify-start gap-2 overflow-y-scroll flex flex-wrap`}>
+          {
+            imgArray.map((itemSrc, idx) => (
+              <ImageThumb
+                src={itemSrc}
+                altText={`Sample Image ${idx}`}
+              />
+            ))
+          }
+        </div>
+
+        <DialogFooter>
+          <DialogClose asChild>
+            <Button className="w-full">Fechar</Button>
+          </DialogClose>
+        </DialogFooter>
+
+      </DialogContent>
+    </Dialog>
+  )
 }
