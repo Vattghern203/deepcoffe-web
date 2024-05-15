@@ -12,6 +12,7 @@ import { Result } from "@/components/molecules/";
 
 import RandomGrid from "@/components/atoms/RandomGrid/RandomGrid"
 import { Dropzone } from "@/components/organisms/";
+import { SampleGallery } from "@/components/molecules/SampleGallery";
 
 export default function UploadFiles() {
   // Create a state to handle a drag and drop event
@@ -25,6 +26,8 @@ export default function UploadFiles() {
   const [fileStack, setFileStack] = useState<File[]>([]);
 
   const [isLoading, setIsLoading] = useState(false)
+
+  const [showGallery, setShowGallery] = useState(false)
 
   const [data, setData] = useState<IResultData[]>([])
 
@@ -178,7 +181,7 @@ export default function UploadFiles() {
           <RandomGrid
             uploadCount={namedBlobs.length}
             isLoading={isLoading}
-            onClickAction={() => console.log('WORKED')}
+            onClickAction={() => setShowGallery(true)}
           >
             {namedBlobs.map((elem) => (
               <img
@@ -193,6 +196,20 @@ export default function UploadFiles() {
           </RandomGrid>
         )
       }
+
+      <SampleGallery.Root isOpen={showGallery} onOpenChangeFn={() => setShowGallery(true)} setIsOpen={setShowGallery}>
+        <SampleGallery.Header
+          galleryTitle="Uploads"
+          galleryDescription="Selecione uma das imagens para a análise"
+        />
+        <SampleGallery.Grid
+          imgArray={namedBlobs}
+        />
+        <SampleGallery.Footer
+          closeBtnText="Fechar"
+        />
+      </SampleGallery.Root>
+
 
       {fileStack.length !== 0 && (
         <UploadFilesConfirmation

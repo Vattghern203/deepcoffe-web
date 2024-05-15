@@ -75,7 +75,6 @@ export default function RandomGrid({ children, uploadCount, cols = 3, isLoading,
           )}
         </div>
       </section>
-
     </>
   );
 }

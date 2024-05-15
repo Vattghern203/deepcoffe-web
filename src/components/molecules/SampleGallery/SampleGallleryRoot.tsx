@@ -1,30 +1,28 @@
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 
-import { ImageThumb } from "@/components/molecules"
-
-import { ReactNode } from "react";
+import { Dispatch, ReactNode, SetStateAction } from "react";
 
 interface SampleGalleryProps {
 
-  imgArray: string[]
+  children: ReactNode
+  isOpen: boolean
+  setIsOpen: Dispatch<SetStateAction<boolean>>
+  onOpenChangeFn: () => void
 }
 
-function SampleGalleryRoot( { imgArray }:SampleGalleryProps ) {
+function SampleGalleryRoot( { children, isOpen, onOpenChangeFn }:SampleGalleryProps ) {
 
   return (
 
-    <Dialog>
-      <div className="grid grid-flow-row">
-        {imgArray.map((imgSrc, idx) => (
-
-          <img key={idx} src={imgSrc}/>
-        ))}
-      </div>
+    <Dialog open={isOpen} onOpenChange={onOpenChangeFn}>
+      <DialogContent className="max-w-[60%] overflow-clip">
+        {children}
+      </DialogContent>
     </Dialog>
   )
 }
 
-interface UploadGalleryProps {
+/* interface UploadGalleryProps {
 
   children: ReactNode
   imgArray: string[]
@@ -37,24 +35,11 @@ function UploadGallery( { children, imgArray }:UploadGalleryProps ) {
 
 
     <Dialog>
-
-      {children}
-
-      <DialogContent>
-        {
-          imgArray.map((item, idx) => (
-
-            <ImageThumb
-              key={idx}
-              src={``}
-              altText={`Sample Image ${idx}`}
-            />
-          ))
-        }
+      <DialogContent className="max-w-[60%] overflow-clip">
+        {children}
       </DialogContent>
-
     </Dialog>
   )
 }
-
+ */
 export default SampleGalleryRoot
