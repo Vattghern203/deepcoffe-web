@@ -4,6 +4,8 @@ import FileIcon from '@/components/atoms/Icons/FileIcon'
 
 import { Button } from '@/components/ui/button'
 
+import styles from "./dropzone.module.css"
+
 interface DropzoneProps extends LabelHTMLAttributes<HTMLLabelElement> {
   fileStack: File[];
   setFileStack: Dispatch<SetStateAction<File[]>>
@@ -55,7 +57,7 @@ function Dropzone({
   }
 
   return (
-    
+
     <label
       id="dropzone"
       role="button"
@@ -63,9 +65,9 @@ function Dropzone({
       onDragOver={dragOverHandler}
       onDragLeave={() => setIsBeingDragged(false)}
       data-dragged={isBeingDragged}
-      className="w-full max-w-3xl p-4 border-2 border-dashed flex flex-col items-center justify-center gap-2 border-secondary-foreground/50 focus-visible:outline cursor-pointer transition-all ease-in-out hover:bg-secondary
+      className={`w-full max-w-3xl p-4 border-2 border-dashed flex flex-col items-center justify-center gap-2 border-secondary-foreground/50 focus-visible:outline cursor-pointer transition-all ease-in-out hover:bg-secondary
       data-[dragged=true]:bg-secondary
-      rounded-l has-[#file-form:focus-visible]:outline fade-in-25"
+      rounded-l has-[#file-form:focus-visible]:outline fade-in-25 relative`}
       htmlFor="file-form"
     >
       <span className="h-20 flex items-center gap-2 text-2xl font-semibold">

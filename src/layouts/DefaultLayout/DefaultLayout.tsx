@@ -7,7 +7,7 @@ export default function DefaultLayout() {
 
     <>
       <Nav />
-      <main>
+      <main role="main">
         <Outlet />
       </main>
 

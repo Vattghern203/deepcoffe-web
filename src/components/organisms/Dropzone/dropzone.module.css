@@ -1,0 +1,15 @@
+.dropzone[data-dragged=true] {
+
+  &::before {
+
+    content: "";
+    display: block;
+    width: 100vmax;
+    height: 125vh;
+    background-color: rgba(255, 0, 0, 0.082);
+    position: absolute;
+    inset: 50%;
+    z-index: 100000000;
+    transform: translate(-50%, -50%);
+  }
+}

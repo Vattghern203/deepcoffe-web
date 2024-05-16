@@ -23,6 +23,8 @@ export default function UploadFiles() {
     value: number
   }
 
+  const [selectedImage, setSelectedImage] = useState([])
+
   const [fileStack, setFileStack] = useState<File[]>([]);
 
   const [isLoading, setIsLoading] = useState(false)
@@ -165,7 +167,7 @@ export default function UploadFiles() {
             <section className="flex items-center gap-2 w-full max-w-3xl p-4 border-2 rounded-md mx-auto fade-in-10">
               <Loader className="animate-spin transition-transform will-change-transform" />
 
-              <article >
+              <article role="alert">
                 <h2 className="text-2xl font-bold">Análise em andamento</h2>
 
                 <p className="text-xl">Isso pode demorar um pouco, sinta-se livre para navegar em outras páginas do site.</p>
@@ -181,7 +183,8 @@ export default function UploadFiles() {
           <RandomGrid
             uploadCount={namedBlobs.length}
             isLoading={isLoading}
-            onClickAction={() => setShowGallery(true)}
+            singleImageAction={() => setShowGallery(true)}
+            multImageAction={() => handleUpload()}
           >
             {namedBlobs.map((elem) => (
               <img

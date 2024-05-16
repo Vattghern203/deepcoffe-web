@@ -18,7 +18,6 @@ function SampleGalleryHeader({ galleryTitle, galleryDescription }: SampleGallery
       <DialogDescription>
         {galleryDescription}
       </DialogDescription>
-
     </DialogHeader>
   )
 }

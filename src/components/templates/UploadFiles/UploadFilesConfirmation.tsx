@@ -32,13 +32,13 @@ export default function UploadFilesConfirmation({ src, uploadCount, onCancelActi
 
   return (
 
-    <Dialog defaultOpen>
-      <DialogContent className="w-full">
+    <Dialog defaultOpen >
+      <DialogContent className="w-[90vw]">
         <DialogHeader>
-          <DialogTitle>Confirm this image to be analysed?</DialogTitle>
+          <DialogTitle>Você tem certeza que quer analisar esta image?</DialogTitle>
 
           <DialogDescription>
-            The image cannot be changed until the process is finished.
+            A imagem não pode ser alterada até o fim da análise.
           </DialogDescription>
         </DialogHeader>
 
@@ -54,10 +54,11 @@ export default function UploadFilesConfirmation({ src, uploadCount, onCancelActi
             <CarouselContent>
               {src.map((element, index) => (
                 <CarouselItem>
+
                   <ImageThumb
                     src={element}
                     key={index}
-                    altText="Image to be analysed."
+                    altText={`Image to be analysed ${index}.`}
                   />
                 </CarouselItem>
               ))}

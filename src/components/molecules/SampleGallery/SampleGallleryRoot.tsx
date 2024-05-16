@@ -15,7 +15,7 @@ function SampleGalleryRoot( { children, isOpen, onOpenChangeFn }:SampleGalleryPr
   return (
 
     <Dialog open={isOpen} onOpenChange={onOpenChangeFn}>
-      <DialogContent className="max-w-[60%] overflow-clip">
+      <DialogContent className="w-[90vw] max-w-[800px] overflow-clip">
         {children}
       </DialogContent>
     </Dialog>

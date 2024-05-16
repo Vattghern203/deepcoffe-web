@@ -14,10 +14,11 @@ interface RandomGridProps {
   uploadCount: number;
   isLoading: boolean;
   cols?: number;
-  onClickAction: () => void | Promise<void>;
+  singleImageAction: () => void | Promise<void>;
+  multImageAction: () => void | Promise<void>;
 }
 
-export default function RandomGrid({ children, uploadCount, cols = 3, isLoading, onClickAction }: RandomGridProps) {
+export default function RandomGrid({ children, uploadCount, cols = 3, isLoading, singleImageAction, multImageAction }: RandomGridProps) {
 
 
   const btnVariantCheck = uploadCount === 1 ? 1 : 0;
@@ -25,11 +26,11 @@ export default function RandomGrid({ children, uploadCount, cols = 3, isLoading,
   const btnVariants: GalleryBtnVariantType[] = [
     {
       buttonLabel: "Abrir Galeria",
-      onClickFn: onClickAction,
+      onClickFn: singleImageAction,
     },
     {
       buttonLabel: "Analisar Imagem",
-      onClickFn: onClickAction,
+      onClickFn: multImageAction,
     },
   ];
 
@@ -65,51 +66,3 @@ export default function RandomGrid({ children, uploadCount, cols = 3, isLoading,
     </>
   );
 }
-
-/* interface ModalGalleryProps {
-
-  imgArray: string[]
-  isOpen: boolean
-  setIsOpen: SetStateAction<boolean>
-  onOpenChangeFn: () => void
-  galleryTitle: string
-  galleryDescription: string
-}
-
-function ModalGallery({ imgArray, isOpen, onOpenChangeFn, galleryTitle, galleryDescription }: ModalGalleryProps) {
-
-  return (
-    <Dialog open={isOpen} onOpenChange={onOpenChangeFn}>
-      <DialogContent className="max-w-[60%] overflow-clip">
-        <DialogHeader>
-          <DialogTitle>
-            {galleryTitle}
-          </DialogTitle>
-
-          <DialogDescription>
-            {galleryDescription}
-          </DialogDescription>
-
-        </DialogHeader>
-
-        <div className={`h-80 w-full items-start justify-start gap-2 overflow-y-scroll flex flex-wrap`}>
-          {
-            imgArray.map((itemSrc, idx) => (
-              <ImageThumb
-                src={itemSrc}
-                altText={`Sample Image ${idx}`}
-              />
-            ))
-          }
-        </div>
-
-        <DialogFooter>
-          <DialogClose asChild>
-            <Button className="w-full">Fechar</Button>
-          </DialogClose>
-        </DialogFooter>
-
-      </DialogContent>
-    </Dialog>
-  )
-} */
