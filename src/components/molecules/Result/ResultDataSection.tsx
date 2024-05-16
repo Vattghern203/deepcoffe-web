@@ -10,7 +10,9 @@ interface ResultDataSectionProps {
 
 export default function ResultDataSection( { resultHeading, resultDate, resultSubHeading, children }:ResultDataSectionProps ) {
 
-  resultDate = Object.freeze(resultDate || new Date(Date.now()).toLocaleString('pt-br'))
+  const getCurrentDate = () => Object.freeze(resultDate || new Date(Date.now()).toLocaleString('pt-br'))
+
+  resultDate = getCurrentDate()
 
   return (
     <section className="w-2/3 pl-8">

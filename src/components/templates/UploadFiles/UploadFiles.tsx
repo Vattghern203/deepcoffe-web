@@ -23,7 +23,7 @@ export default function UploadFiles() {
     value: number
   }
 
-  const [selectedImage, setSelectedImage] = useState([])
+  //const [selectedImage, setSelectedImage] = useState([])
 
   const [fileStack, setFileStack] = useState<File[]>([]);
 

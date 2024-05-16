@@ -4,7 +4,6 @@ import FileIcon from '@/components/atoms/Icons/FileIcon'
 
 import { Button } from '@/components/ui/button'
 
-import styles from "./dropzone.module.css"
 
 interface DropzoneProps extends LabelHTMLAttributes<HTMLLabelElement> {
   fileStack: File[];
