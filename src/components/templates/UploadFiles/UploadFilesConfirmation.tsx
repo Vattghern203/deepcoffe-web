@@ -28,11 +28,11 @@ interface DialogProps {
   onConfirmAction: (() => void) | (() => Promise<void>)
 }
 
-export default function UploadFilesConfirmation({ src, uploadCount, onCancelAction, onConfirmAction }: DialogProps) {
+export default function UploadFilesConfirmation({ src, onCancelAction, onConfirmAction }: DialogProps) {
 
   return (
 
-    <Dialog open={uploadCount === 1} >
+    <Dialog defaultOpen >
       <DialogContent className="w-[90dvw]">
         <DialogHeader>
           <DialogTitle>Você tem certeza que quer analisar esta image?</DialogTitle>

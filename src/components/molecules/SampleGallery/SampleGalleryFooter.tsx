@@ -5,15 +5,21 @@ import { DialogClose } from "@radix-ui/react-dialog";
 interface SampleGalleryFooterProps {
 
   closeBtnText: string
+  hasSelectedImage?: boolean
 }
 
 function SampleGalleryFooter( { closeBtnText }:SampleGalleryFooterProps ) {
 
   return (
 
-    <DialogFooter>
-      <DialogClose asChild >
-        <Button className="w-full">{closeBtnText}</Button>
+    <DialogFooter className="flex flex-wrap px-2">
+      <DialogClose asChild className="flex-1 min-w-fit flex-nowrap">
+        <Button variant={"outline"}>{closeBtnText}</Button>
+
+      </DialogClose>
+
+      <DialogClose asChild className="flex-1 min-w-fit flex-nowrap">
+        <Button disabled variant={"default"}>Analisar</Button>
       </DialogClose>
     </DialogFooter>
   )

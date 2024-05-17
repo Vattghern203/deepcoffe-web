@@ -1,4 +1,7 @@
 import { ImageThumb } from "@/components/molecules/"
+import { useState } from "react"
+
+import styles from "./sample-gallery.module.css"
 
 interface SampleGalleryGridProps {
   imgArray: string[]
@@ -6,19 +9,22 @@ interface SampleGalleryGridProps {
 
 function SampleGalleryGrid({ imgArray }: SampleGalleryGridProps) {
 
+  const [selectedImage, setSelectedImage] = useState<number>()
+
   return (
 
-    <div className={`h-80 w-full items-start overflow-y-scroll grid gap-2 grid-cols-4 py-2 isolate`}>
+    <div className={` h-[60dvh] w-full items-start overflow-y-scroll gap-2 p-2 isolate ${styles.grid_dynamic}`}>
       {
         imgArray.map((itemSrc, idx) => (
           <ImageThumb
-            className="self-stretch hover:scale-200 "
+            key={idx}
+            className={`self-stretch ${selectedImage === idx ? 'outline' : ''}`}
+            altText={`Sample ${idx}`}
+            tabIndex={0}
             role="checkbox"
             src={itemSrc}
             loading="lazy"
-            onClick={() => console.log('OPA')}
-            key={idx}
-            altText={`Sample ${idx}`}
+            onClick={() => setSelectedImage(idx)}
 
           //altText={`Sample Image ${idx}`}
           />

@@ -18,18 +18,21 @@ function ImageThumb ({
   aspectRatio,
   placeholder,
   className,
+  ...rest
 }: ImageThumbProps) {
   const baseClasses = cn(
-    "image-thumb block mx-auto rounded-md object-cover object-center w-full h-auto hover:scale-125",
+    "image-thumb block mx-auto rounded-md object-cover object-center w-full h-auto",
     { "aspect-ratio": aspectRatio }
   );
 
   return (
-    <Suspense fallback={<Skeleton className={cn("block mx-auto rounded-md w-full", { aspectRatio: '10/14' })} />}>
+    <Suspense fallback={<Skeleton className="block mx-auto rounded-md w-full h-[230]" />}>
       <img
         src={src || placeholder || process.env.IMAGE_PLACEHOLDER}
         alt={altText}
         className={cn(baseClasses, className)}
+        style={{ aspectRatio: aspectRatio || '10/14' }}
+        {...rest}
       />
     </Suspense>
   )
