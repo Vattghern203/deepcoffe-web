@@ -4,7 +4,7 @@
  * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
  */
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { Loader } from "lucide-react";
 
 import UploadFilesConfirmation from "./UploadFilesConfirmation"
@@ -13,6 +13,7 @@ import { Result } from "@/components/molecules/";
 import RandomGrid from "@/components/atoms/RandomGrid/RandomGrid"
 import { Dropzone } from "@/components/organisms/";
 import { SampleGallery } from "@/components/molecules/SampleGallery";
+import { ImageSkeleton } from "@/layouts/GenericSkeletons";
 
 export default function UploadFiles() {
   // Create a state to handle a drag and drop event
@@ -186,15 +187,22 @@ export default function UploadFiles() {
             singleImageAction={() => setShowGallery(true)}
             multImageAction={() => handleUpload()}
           >
-            {namedBlobs.map((elem) => (
-              <img
-                loading="lazy"
-                title={elem}
-                className="rounded-md"
-                src={elem}
-                alt="Sample Image"
-                key={elem}
-              />
+            {namedBlobs.map((elem, idx) => (
+
+              idx < 9 && (
+
+                <Suspense fallback={<ImageSkeleton />}>
+                  <img
+                    loading="lazy"
+                    title={elem}
+                    className="rounded-md w-full block object-cover"
+                    src={elem}
+                    alt="Sample Image"
+                    key={elem}
+                  />
+                </Suspense>
+              )
+
             ))}
           </RandomGrid>
         )

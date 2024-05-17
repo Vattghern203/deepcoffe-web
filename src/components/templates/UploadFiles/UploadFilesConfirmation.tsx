@@ -2,13 +2,13 @@ import { ImageThumb } from "@/components/molecules/"
 
 import { Button } from "@/components/ui/button"
 
-import {
+/* import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious
-} from "@/components/ui/carousel"
+} from "@/components/ui/carousel" */
 
 import {
   Dialog,
@@ -32,8 +32,8 @@ export default function UploadFilesConfirmation({ src, uploadCount, onCancelActi
 
   return (
 
-    <Dialog defaultOpen >
-      <DialogContent className="w-[90vw]">
+    <Dialog open={uploadCount === 1} >
+      <DialogContent className="w-[90dvw]">
         <DialogHeader>
           <DialogTitle>Você tem certeza que quer analisar esta image?</DialogTitle>
 
@@ -42,15 +42,12 @@ export default function UploadFilesConfirmation({ src, uploadCount, onCancelActi
           </DialogDescription>
         </DialogHeader>
 
-        {uploadCount == 1
-
-          ?
 
           <ImageThumb src={src[0]} altText="Image to be analysed." />
 
-          :
 
-          <Carousel>
+
+          {/* <Carousel>
             <CarouselContent>
               {src.map((element, index) => (
                 <CarouselItem>
@@ -65,10 +62,7 @@ export default function UploadFilesConfirmation({ src, uploadCount, onCancelActi
             </CarouselContent>
             <CarouselPrevious />
             <CarouselNext />
-          </Carousel>
-
-        }
-
+          </Carousel> */}
 
         <DialogFooter className="sm:gap-1">
           <DialogClose asChild>

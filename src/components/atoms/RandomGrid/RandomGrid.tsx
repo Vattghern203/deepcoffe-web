@@ -54,7 +54,7 @@ export default function RandomGrid({ children, uploadCount, cols = 3, isLoading,
 
           {!isLoading && (
             <Button
-              className="absolute left-[50%] translate-x-[-50%] top-[80%] opacity-0 transition-all z-20"
+              className="absolute left-[50%] translate-x-[-50%] top-[80%] opacity-0 ease-in-out transition-all duration-300 z-20"
               size={"lg"}
               onClick={btnVariants[btnVariantCheck].onClickFn}
             >
