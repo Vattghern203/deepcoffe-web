@@ -12,7 +12,6 @@ interface SampleGalleryProps {
 
 function SampleGalleryRoot( { children, isOpen, onOpenChangeFn }:SampleGalleryProps ) {
 
-
   return (
 
     <Dialog open={isOpen} onOpenChange={onOpenChangeFn}>
@@ -23,24 +22,4 @@ function SampleGalleryRoot( { children, isOpen, onOpenChangeFn }:SampleGalleryPr
   )
 }
 
-/* interface UploadGalleryProps {
-
-  children: ReactNode
-  imgArray: string[]
-}
-
-function UploadGallery( { children, imgArray }:UploadGalleryProps ) {
-
-  return (
-
-
-
-    <Dialog>
-      <DialogContent className="max-w-[60%] overflow-clip">
-        {children}
-      </DialogContent>
-    </Dialog>
-  )
-}
- */
 export default SampleGalleryRoot

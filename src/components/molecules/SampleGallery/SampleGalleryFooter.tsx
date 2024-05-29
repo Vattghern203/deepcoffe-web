@@ -15,7 +15,6 @@ function SampleGalleryFooter( { closeBtnText }:SampleGalleryFooterProps ) {
     <DialogFooter className="flex flex-wrap px-2">
       <DialogClose asChild className="flex-1 min-w-fit flex-nowrap">
         <Button variant={"outline"}>{closeBtnText}</Button>
-
       </DialogClose>
 
       <DialogClose asChild className="flex-1 min-w-fit flex-nowrap">
