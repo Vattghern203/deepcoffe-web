@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { DialogFooter } from "@/components/ui/dialog";
-import { DialogClose } from "@radix-ui/react-dialog";
+import { DialogClose } from "@/components/ui/dialog";
 
 interface SampleGalleryFooterProps {
 

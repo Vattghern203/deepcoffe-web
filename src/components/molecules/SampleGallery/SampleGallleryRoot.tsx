@@ -12,6 +12,7 @@ interface SampleGalleryProps {
 
 function SampleGalleryRoot( { children, isOpen, onOpenChangeFn }:SampleGalleryProps ) {
 
+
   return (
 
     <Dialog open={isOpen} onOpenChange={onOpenChangeFn}>
