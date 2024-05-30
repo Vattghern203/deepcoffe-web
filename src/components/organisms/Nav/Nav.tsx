@@ -4,7 +4,7 @@
  * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
  */
 
-import './header.module.css'
+import styles from './header.module.css'
 
 import { Link } from "react-router-dom"
 import { ModeToggle } from "@/components/mode-toggle"
@@ -12,7 +12,7 @@ import { Logo } from '@/components/atoms/Icons/Logo'
 
 export default function Component() {
   return (
-    <header className="sticky inset-x-0 top-0 z-50">
+    <header className={`sticky inset-x-0 top-0 z-50 ${styles.header}`}>
       <section className="px-4 md:px-6">
         <div className="flex h-14 items-center justify-between">
           <Link className="mr-6" to="/">

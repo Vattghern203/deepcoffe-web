@@ -13,9 +13,9 @@ export default function ResultItem({ resultLabel, resultValue }: ResultItemProps
 
   useEffect(() => {
     let animationFrameId: number;
-    const duration = 3000; // Duration of the animation in milliseconds
+    const duration = 3000;
     const startValue = 0;
-    const step = (resultValue - startValue) / (duration / 2); // Adjust for smoother animation
+    const step = (resultValue - startValue) / (duration / 2);
 
     const animate = (timestamp: number) => {
       const elapsed = timestamp - startTime;

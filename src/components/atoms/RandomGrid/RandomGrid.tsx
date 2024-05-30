@@ -34,6 +34,8 @@ export default function RandomGrid({ children, uploadCount, cols = 3, isLoading,
     },
   ];
 
+  console.log('Random Grid Rendered', new Date())
+
   return (
     <>
       <section className="flex flex-col justify-center items-center mb-10 max-h-[600px]">

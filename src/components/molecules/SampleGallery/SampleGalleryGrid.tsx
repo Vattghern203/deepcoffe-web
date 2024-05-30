@@ -3,6 +3,7 @@ import { ImageThumb } from "@/components/molecules/";
 import { useState, useCallback } from "react";
 
 import styles from "./sample-gallery.module.css";
+
 import classNames from "classnames";
 
 interface SampleGalleryGridProps {

@@ -32,44 +32,24 @@ export default function UploadFilesConfirmation({ src, onCancelAction, onConfirm
 
   return (
 
-    <Dialog defaultOpen >
+    <Dialog defaultOpen>
       <DialogContent className="w-[90dvw]">
         <DialogHeader>
-          <DialogTitle>Você tem certeza que quer analisar esta image?</DialogTitle>
+          <DialogTitle>Você tem certeza que quer analisar esta imagem?</DialogTitle>
 
           <DialogDescription>
             A imagem não pode ser alterada até o fim da análise.
           </DialogDescription>
         </DialogHeader>
 
-
-          <ImageThumb src={src[0]} altText="Image to be analysed." />
-
-
-
-          {/* <Carousel>
-            <CarouselContent>
-              {src.map((element, index) => (
-                <CarouselItem>
-
-                  <ImageThumb
-                    src={element}
-                    key={index}
-                    altText={`Image to be analysed ${index}.`}
-                  />
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
-          </Carousel> */}
+          <ImageThumb src={src[0]} altText="Image to be analysed." title="sample image" />
 
         <DialogFooter className="sm:gap-1">
           <DialogClose asChild>
-            <Button variant={"outline"} onClick={onCancelAction}>Cancel</Button>
+            <Button variant={"outline"} onClick={onCancelAction} className="w-full min-w-fit flex-wrap">Cancel</Button>
           </DialogClose>
-          <DialogClose asChild >
-            <Button onClick={onConfirmAction}>
+          <DialogClose asChild>
+            <Button onClick={onConfirmAction} className="w-full min-w-fit flex-wrap">
               Ok
             </Button>
           </DialogClose>

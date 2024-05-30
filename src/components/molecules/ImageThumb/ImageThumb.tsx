@@ -1,41 +1,40 @@
-import { Skeleton } from "@/components/ui/skeleton"
-import process from "process"
-import { ImgHTMLAttributes, Suspense } from "react"
-
-import { cn } from "@/lib/utils"; // Assuming `cn` is a utility function for Tailwind classes
+import { Skeleton } from "@/components/ui/skeleton";
+import process from "process";
+import { ImgHTMLAttributes, Suspense, memo } from "react";
+import { cn } from "@/lib/utils";
 
 interface ImageThumbProps extends ImgHTMLAttributes<HTMLImageElement> {
-  src?: string; // Optional image source
-  altText: string; // Required alternative text
-  aspectRatio?: string; // Optional aspect ratio (e.g., "16/9", "4/3")
-  placeholder?: string; // Optional path to a placeholder image
-  className?: string; // Optional additional classes
+  src?: string;
+  altText: string;
+  aspectRatio?: string;
+  placeholder?: string;
+  className?: string;
 }
 
-function ImageThumb ({
+const ImageThumb = memo(({
   src,
   altText,
-  aspectRatio,
+  aspectRatio = '10/14',
   placeholder,
   className,
   ...rest
-}: ImageThumbProps) {
+}: ImageThumbProps) => {
   const baseClasses = cn(
     "image-thumb block mx-auto rounded-md object-cover object-center w-full h-auto",
     { "aspect-ratio": aspectRatio }
   );
 
   return (
-    <Suspense fallback={<Skeleton className="block mx-auto rounded-md w-full h-[230]" />}>
+    <Suspense fallback={<Skeleton className="block mx-auto rounded-md w-full h-[230px]" />}>
       <img
         src={src || placeholder || process.env.IMAGE_PLACEHOLDER}
         alt={altText}
         className={cn(baseClasses, className)}
-        style={{ aspectRatio: aspectRatio || '10/14' }}
+        style={{ aspectRatio }}
         {...rest}
       />
     </Suspense>
-  )
-}
+  );
+});
 
 export default ImageThumb;

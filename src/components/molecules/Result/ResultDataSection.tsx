@@ -1,4 +1,4 @@
-import { ReactNode } from "react"
+import { ReactNode, useMemo } from "react"
 
 interface ResultDataSectionProps {
 
@@ -10,9 +10,9 @@ interface ResultDataSectionProps {
 
 export default function ResultDataSection( { resultHeading, resultDate, resultSubHeading, children }:ResultDataSectionProps ) {
 
-  const getCurrentDate = () => Object.freeze(resultDate || new Date(Date.now()).toLocaleString('pt-br'))
+  const getCurrentDate = () => (resultDate || new Date(Date.now()).toLocaleDateString('pt-br'))
 
-  resultDate = getCurrentDate()
+  resultDate = useMemo(getCurrentDate, [getCurrentDate])
 
   return (
     <section className="w-2/3 pl-8">
