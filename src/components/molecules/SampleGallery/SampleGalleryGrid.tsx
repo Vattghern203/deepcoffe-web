@@ -1,16 +1,16 @@
+import { useState, useCallback } from "react";
+import classNames from "classnames";
+
 import { ImageThumb } from "@/components/molecules/";
 
-import { useState, useCallback } from "react";
-
 import styles from "./sample-gallery.module.css";
-
-import classNames from "classnames";
 
 interface SampleGalleryGridProps {
   imgArray: string[];
 }
 
 function SampleGalleryGrid({ imgArray }: SampleGalleryGridProps) {
+
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
 
   const handleImageClick = useCallback((idx: number) => {

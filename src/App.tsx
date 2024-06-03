@@ -1,18 +1,21 @@
 import { BrowserRouter } from 'react-router-dom'
 
-import { ThemeProvider } from './components/theme-provider'
+import { ThemeProvider } from './context/theme-provider'
 import { Router } from './components/molecules/Router/Router'
 
 import "./assets/css/main.css"
+import { ImageProvider } from './context/selected-image-provider'
 
 function App() {
 
   return (
     <>
       <ThemeProvider >
-        <BrowserRouter>
-          <Router />
-        </BrowserRouter>
+        <ImageProvider>
+          <BrowserRouter>
+            <Router />
+          </BrowserRouter>
+        </ImageProvider>
       </ThemeProvider>
     </>
   )
