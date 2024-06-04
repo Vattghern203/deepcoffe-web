@@ -1,17 +1,25 @@
 import { Dispatch, ReactNode, SetStateAction } from "react"
 
-interface ImageProviderProps {
-  children: ReactNode
+type SelectedImage = {
+  path: string
+  blob?: Blob | MediaSource
+  base64?: string
 }
 
-type ImageState = {
-  path: string
-  newPath: string
+interface ImageProviderProps {
+  children: ReactNode
+  imagePlaceholderPath?: string
+  storageKey?: string
+}
+
+type ImageProviderState = {
+  selectedImage: string | undefined
+  setSelectedImage: Dispatch<SetStateAction<SelectedImage>>
 }
 
 type ImageContextType = {
-  selectedImage: ImageState
-  setSelectedImage: Dispatch<SetStateAction<ImageState>>
+  selectedImage: SelectedImage
+  setSelectedImage: Dispatch<SetStateAction<SelectedImage>>
 }
 
-export type { ImageProviderProps, ImageState, ImageContextType }
+export type { SelectedImage, ImageProviderProps, ImageProviderState, ImageContextType }

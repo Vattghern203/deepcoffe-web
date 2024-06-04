@@ -11,4 +11,4 @@ const SampleGallery = {
   Footer: SampleGalleryFooter
 }
 
-export { SampleGallery }
+export default SampleGallery

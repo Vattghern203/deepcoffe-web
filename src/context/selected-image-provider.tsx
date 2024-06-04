@@ -1,30 +1,43 @@
 import { createContext, useState, useEffect } from "react";
+import { ImageProviderProps, SelectedImage, ImageContextType } from "@/types/ImageTypes";
+import { convertBlobToBase64 } from "@/utils/convertToBase64";
+import { createBlob } from "@/utils/createBlob";
 
-import { ImageProviderProps, ImageContextType, ImageState } from "@/types/ImageTypes"
+const ImageProviderContext = createContext<ImageContextType | undefined>(undefined);
 
-const ImageProviderContext = createContext<ImageContextType | undefined>(undefined)
+function ImageProvider({ children, storageKey = "selected-image", imagePlaceholderPath = "" }: ImageProviderProps) {
+  const [selectedImage, setSelectedImage] = useState<SelectedImage>(() => {
+    const savedImage = localStorage.getItem(storageKey);
 
-function ImageProvider( { children }:ImageProviderProps ) {
+    if (savedImage) {
+      const parsedImage = JSON.parse(savedImage);
+      const blob = createBlob(parsedImage.blob) as unknown as Blob;
+      const base64 = convertBlobToBase64(blob) as unknown as string; // Ensure base64 is a string
+      return {
+        path: parsedImage.path,
+        blob,
+        base64,
+      };
+    }
 
-  const [selectedImage, setSelectedImage] = useState<ImageState>(() => {
-
-    const savedImage = localStorage.getItem('selectedImage');
-
-    return savedImage ? JSON.parse(savedImage) : { path: 'public/sample.jpg' }
-  })
-
+    return {
+      path: imagePlaceholderPath,
+      blob: undefined,
+      base64: undefined,
+    };
+  });
 
   useEffect(() => {
-
-    localStorage.setItem('imageState', JSON.stringify(selectedImage))
-  }, [selectedImage])
+    if (selectedImage) {
+      localStorage.setItem(storageKey, JSON.stringify(selectedImage));
+    }
+  }, [selectedImage, storageKey]);
 
   return (
-
-    <ImageProviderContext.Provider value={{ selectedImage, setSelectedImage}}>
+    <ImageProviderContext.Provider value={{ selectedImage, setSelectedImage }}>
       {children}
     </ImageProviderContext.Provider>
-  )
+  );
 }
 
-export { ImageProviderContext, ImageProvider }
+export { ImageProviderContext, ImageProvider };

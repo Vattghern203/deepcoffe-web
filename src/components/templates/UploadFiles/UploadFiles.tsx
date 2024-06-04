@@ -1,10 +1,13 @@
 import { Suspense, useState } from "react";
 import { Loader } from "lucide-react";
-import UploadFilesConfirmation from "./UploadFilesConfirmation";
-import { Result } from "@/components/molecules/";
-import RandomGrid from "@/components/atoms/RandomGrid/RandomGrid";
-import { Dropzone } from "@/components/organisms/";
-import { SampleGallery } from "@/components/molecules/SampleGallery";
+
+import { useImage } from "@/hooks/useImageContext";
+
+import UploadFilesConfirmation from "./UploadFilesConfirmation"
+
+import { RandomGrid } from "@/components/atoms";
+import { Result, SampleGallery } from "@/components/molecules";
+import { Dropzone } from "@/components/organisms";
 import { ImageSkeleton } from "@/layouts/GenericSkeletons";
 
 export default function UploadFiles() {
@@ -18,6 +21,10 @@ export default function UploadFiles() {
   const [showGallery, setShowGallery] = useState(false);
   const [data, setData] = useState<IResultData[]>([]);
   const [isBeingDragged, setIsBeingDragged] = useState(false);
+
+  const context = useImage()
+
+  console.log(context.selectedImage)
 
   const sampleImage = fileStack[fileStack.length - 1] || null;
 
