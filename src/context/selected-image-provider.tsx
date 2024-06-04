@@ -1,29 +1,27 @@
 import { createContext, useState, useEffect } from "react";
-import { ImageProviderProps, SelectedImage, ImageContextType } from "@/types/ImageTypes";
-import { convertBlobToBase64 } from "@/utils/convertToBase64";
-import { createBlob } from "@/utils/createBlob";
+import { ImageProviderProps, SelectedImage, ImageProviderState } from "@/types/ImageTypes";
 
-const ImageProviderContext = createContext<ImageContextType | undefined>(undefined);
+const initalState: ImageProviderState = {
+  selectedImage: undefined,
+  setSelectedImage: () => null
+}
 
-function ImageProvider({ children, storageKey = "selected-image", imagePlaceholderPath = "" }: ImageProviderProps) {
+const ImageProviderContext = createContext<ImageProviderState>(initalState);
+
+function ImageProvider({ children, storageKey = "selected-image", imagePlaceholderPath = "", ...props }: ImageProviderProps) {
   const [selectedImage, setSelectedImage] = useState<SelectedImage>(() => {
     const savedImage = localStorage.getItem(storageKey);
 
     if (savedImage) {
-      const parsedImage = JSON.parse(savedImage);
-      const blob = createBlob(parsedImage.blob) as unknown as Blob;
-      const base64 = convertBlobToBase64(blob) as unknown as string; // Ensure base64 is a string
+      const parsedImage = JSON.parse(savedImage) as SelectedImage;
       return {
         path: parsedImage.path,
-        blob,
-        base64,
+        file: parsedImage.file
       };
     }
 
     return {
       path: imagePlaceholderPath,
-      blob: undefined,
-      base64: undefined,
     };
   });
 
@@ -34,7 +32,7 @@ function ImageProvider({ children, storageKey = "selected-image", imagePlacehold
   }, [selectedImage, storageKey]);
 
   return (
-    <ImageProviderContext.Provider value={{ selectedImage, setSelectedImage }}>
+    <ImageProviderContext.Provider {...props} value={{ selectedImage, setSelectedImage }}>
       {children}
     </ImageProviderContext.Provider>
   );

@@ -2,8 +2,7 @@ import { Dispatch, ReactNode, SetStateAction } from "react"
 
 type SelectedImage = {
   path: string
-  blob?: Blob | MediaSource
-  base64?: string
+  file?: File
 }
 
 interface ImageProviderProps {
@@ -13,7 +12,7 @@ interface ImageProviderProps {
 }
 
 type ImageProviderState = {
-  selectedImage: string | undefined
+  selectedImage: SelectedImage | undefined
   setSelectedImage: Dispatch<SetStateAction<SelectedImage>>
 }
 

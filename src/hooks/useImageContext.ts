@@ -1,8 +1,7 @@
 import { ImageProviderContext } from "@/context/selected-image-provider"
-import { ImageContextType } from "@/types/ImageTypes"
 import { useContext } from "react"
 
-const useImage = (): ImageContextType => {
+const useImage = () => {
 
   const context = useContext(ImageProviderContext)
 

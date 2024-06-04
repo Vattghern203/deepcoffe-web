@@ -22,15 +22,12 @@ export default function UploadFiles() {
   const [data, setData] = useState<IResultData[]>([]);
   const [isBeingDragged, setIsBeingDragged] = useState(false);
 
-  const context = useImage()
 
-  console.log(context.selectedImage)
-
-  const sampleImage = fileStack[fileStack.length - 1] || null;
-
-  console.log(sampleImage)
+  const imageContext = useImage()
 
   const handleUpload = async () => {
+    imageContext.setSelectedImage({path: namedBlobs[0], file: fileStack[0]})
+
     renewUpload();
     setIsLoading(true);
 
