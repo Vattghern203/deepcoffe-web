@@ -3,6 +3,7 @@ import { Dispatch, ReactNode, SetStateAction } from "react"
 type SelectedImage = {
   path: string
   file?: File
+  base64?: string | Promise<string>
 }
 
 interface ImageProviderProps {

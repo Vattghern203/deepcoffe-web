@@ -1,82 +1,115 @@
-import { Suspense, useState } from "react";
-import { Loader } from "lucide-react";
+import { Suspense, useState, useEffect } from "react"
+import { Loader } from "lucide-react"
 
-import { useImage } from "@/hooks/useImageContext";
+import { useImage } from "@/hooks/useImageContext"
 
+import { Dropzone } from "@/components/organisms"
+import { ImageSkeleton } from "@/layouts/GenericSkeletons"
+import { RandomGrid } from "@/components/atoms"
+import { Result, SampleGallery } from "@/components/molecules"
 import UploadFilesConfirmation from "./UploadFilesConfirmation"
 
-import { RandomGrid } from "@/components/atoms";
-import { Result, SampleGallery } from "@/components/molecules";
-import { Dropzone } from "@/components/organisms";
-import { ImageSkeleton } from "@/layouts/GenericSkeletons";
+import { SelectedImage } from "@/types/ImageTypes"
+
+type IResultData = {
+  label: string
+  value: number
+}
 
 export default function UploadFiles() {
-  type IResultData = {
-    label: string;
-    value: number;
-  };
-
-  const [fileStack, setFileStack] = useState<File[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [showGallery, setShowGallery] = useState(false);
-  const [data, setData] = useState<IResultData[]>([]);
-  const [isBeingDragged, setIsBeingDragged] = useState(false);
-
 
   const imageContext = useImage()
 
+  const [fileStack, setFileStack] = useState<File[]>([])
+  const [isLoading, setIsLoading] = useState(false)
+  const [showGallery, setShowGallery] = useState(false)
+  const [data, setData] = useState<IResultData[]>([])
+  const [isBeingDragged, setIsBeingDragged] = useState(false)
+
+  let imageData: SelectedImage[] = []
+
   const handleUpload = async () => {
-    imageContext.setSelectedImage({path: namedBlobs[0], file: fileStack[0]})
 
-    renewUpload();
-    setIsLoading(true);
+    if (fileStack.length === 0) return
 
-    setTimeout(() => {
-      mockLoading(fileStack[0])
-        .then((result) => {
-          setData(result);
-        })
-        .catch((error) => {
-          console.error(error);
-        })
-        .finally(() => {
-          setIsLoading(false);
-        });
-    }, 4000);
-  };
 
-  const createNamedBlob = (file: File) => URL.createObjectURL(file);
+    imageContext.setSelectedImage(imageData[0])
 
-  const convertBlobToBase64 = async (blob: Blob) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(blob);
+    renewUpload()
+    setIsLoading(true)
+
+    try {
+
+      const result = await mockLoading(fileStack[0])
+      setData(result)
+
+    } catch (error) {
+
+      console.error(error)
+
+    } finally {
+
+      setIsLoading(false)
+    }
+  }
+
+  const createNamedBlob = (file: File): string => URL.createObjectURL(file)
+
+  const convertBlobToBase64 = async (blob: Blob): Promise<string> => {
+
+    const reader = new FileReader()
+    reader.readAsDataURL(blob)
 
     return new Promise<string>((resolve) => {
-      reader.onloadend = () => {
-        resolve(reader.result as string);
-      };
-    });
-  };
 
-  const namedBlobs = fileStack.map((item) => createNamedBlob(item));
+      reader.onloadend = () => resolve(reader.result as string)
+    })
+  }
+
+  const namedBlobs = fileStack.map((file) => createNamedBlob(file))
 
   const mockLoading = async (image: File): Promise<IResultData[]> => {
-    const base64 = await convertBlobToBase64(image);
 
+    const base64 = await convertBlobToBase64(image)
     console.log(base64)
 
-    return new Promise<IResultData[]>((resolve) => {
+    return new Promise<IResultData[]>((resolve) =>
       resolve([
         { label: "doenca 01", value: 10 },
         { label: "doenca 02", value: 90 },
         { label: "doenca 03", value: 35.55 },
-      ]);
-    });
-  };
+      ])
+    )
+  }
 
   const renewUpload = () => {
-    setData([]);
-  };
+    setData([])
+  }
+
+  const createImageDataByUpload = async () => {
+
+    if (fileStack.length !== 0) {
+
+      imageData = await Promise.all(
+
+        fileStack.map(async (file) => ({
+
+          path: createNamedBlob(file),
+          base64: await convertBlobToBase64(file),
+          file,
+        }))
+      )
+
+      console.log(imageData)
+    } else {
+
+      imageData = []
+    }
+  }
+
+  useEffect(() => {
+    createImageDataByUpload()
+  }, [fileStack])
 
   return (
     <>
@@ -105,7 +138,7 @@ export default function UploadFiles() {
           uploadCount={namedBlobs.length}
           isLoading={isLoading}
           singleImageAction={() => setShowGallery(true)}
-          multImageAction={() => handleUpload()}
+          multImageAction={handleUpload}
         >
           {namedBlobs.map((elem, idx) => (
             idx < 9 && (
@@ -134,7 +167,7 @@ export default function UploadFiles() {
           uploadCount={namedBlobs.length}
           src={namedBlobs}
           onCancelAction={() => setFileStack([])}
-          onConfirmAction={() => handleUpload()}
+          onConfirmAction={handleUpload}
         />
       )}
 
@@ -149,5 +182,5 @@ export default function UploadFiles() {
         </Result.Root>
       )}
     </>
-  );
+  )
 }

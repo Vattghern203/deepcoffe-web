@@ -14,9 +14,11 @@ function ImageProvider({ children, storageKey = "selected-image", imagePlacehold
 
     if (savedImage) {
       const parsedImage = JSON.parse(savedImage) as SelectedImage;
+
       return {
         path: parsedImage.path,
-        file: parsedImage.file
+        file: parsedImage.file,
+        base64: parsedImage.base64
       };
     }
 

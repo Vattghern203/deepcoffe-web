@@ -1,10 +1,21 @@
-const convertBlobToBase64 = (blob: Blob) => {
-  const reader = new FileReader();
-  reader.readAsDataURL(blob);
+function convertImageToBase64(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+      const reader = new FileReader();
 
-  reader.onloadend = () => {
-    return reader.result as string;
-  };
-};
+      reader.onloadend = () => {
+          if (reader.result) {
+              resolve(reader.result.toString());
+          } else {
+              reject(new Error("Failed to convert image to base64"));
+          }
+      };
 
-export { convertBlobToBase64 }
+      reader.onerror = () => {
+          reject(new Error("Error reading the file"));
+      };
+
+      reader.readAsDataURL(file);
+  });
+}
+
+export { convertImageToBase64 }
