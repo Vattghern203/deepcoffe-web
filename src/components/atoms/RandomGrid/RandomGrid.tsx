@@ -20,7 +20,6 @@ interface RandomGridProps {
 
 export default function RandomGrid({ children, uploadCount, cols = 3, isLoading, singleImageAction, multImageAction }: RandomGridProps) {
 
-
   const btnVariantCheck = uploadCount === 1 ? 1 : 0;
 
   const btnVariants: GalleryBtnVariantType[] = [

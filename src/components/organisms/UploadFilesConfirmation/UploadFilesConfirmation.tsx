@@ -1,14 +1,6 @@
-import { ImageThumb } from "@/components/molecules/"
-
 import { Button } from "@/components/ui/button"
 
-/* import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious
-} from "@/components/ui/carousel" */
+import { ImageThumb } from "@/components/molecules/"
 
 import {
   Dialog,
@@ -28,7 +20,7 @@ interface DialogProps {
   onConfirmAction: (() => void) | (() => Promise<void>)
 }
 
-export default function UploadFilesConfirmation({ src, onCancelAction, onConfirmAction }: DialogProps) {
+function UploadFilesConfirmation({ src, onCancelAction, onConfirmAction }: DialogProps) {
 
   return (
 
@@ -58,3 +50,5 @@ export default function UploadFilesConfirmation({ src, onCancelAction, onConfirm
     </Dialog>
   )
 }
+
+export default UploadFilesConfirmation

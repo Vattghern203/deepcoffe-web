@@ -52,7 +52,11 @@ function Dropzone({
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const selectedFile = event.target.files?.[0];
-    selectedFile ? setFileStack((prev) => [...prev, selectedFile]) : null;
+    selectedFile ? setFileStack((prev) => [...prev, selectedFile]) : undefined;
+
+    event.target.files = null
+
+    console.log(event.target.files)
   }
 
   return (

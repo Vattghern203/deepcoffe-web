@@ -3,11 +3,10 @@ import { Loader } from "lucide-react"
 
 import { useImage } from "@/hooks/useImageContext"
 
-import { Dropzone } from "@/components/organisms"
+import { Dropzone, UploadFilesConfirmation } from "@/components/organisms"
 import { ImageSkeleton } from "@/layouts/GenericSkeletons"
 import { RandomGrid } from "@/components/atoms"
 import { Result, SampleGallery } from "@/components/molecules"
-import UploadFilesConfirmation from "./UploadFilesConfirmation"
 
 import { SelectedImage } from "@/types/ImageTypes"
 
@@ -30,18 +29,29 @@ export default function UploadFiles() {
 
   const handleUpload = async () => {
 
-    if (fileStack.length === 0) return
+    console.log('UPLOAD CLICKED')
 
+    /* if (fileStack.length === 0) return */
 
-    imageContext.setSelectedImage(imageData[0])
+    if (fileStack.length === 1) {
+
+      imageContext.setSelectedImage(imageData[0])
+    }
+
+    //imageContext.setSelectedImage(imageData[0])
 
     renewUpload()
     setIsLoading(true)
 
     try {
 
-      const result = await mockLoading(fileStack[0])
-      setData(result)
+      if (imageContext.selectedImage?.file) {
+
+        const result = await mockLoading(imageContext.selectedImage?.file)
+        setData(result)
+
+      }
+
 
     } catch (error) {
 
@@ -53,7 +63,9 @@ export default function UploadFiles() {
     }
   }
 
-  const createNamedBlob = (file: File): string => URL.createObjectURL(file)
+  const createNamedBlob = (file: File) => URL.createObjectURL(file)
+
+  console.log("Named Blob created")
 
   const convertBlobToBase64 = async (blob: Blob): Promise<string> => {
 
@@ -159,7 +171,10 @@ export default function UploadFiles() {
       <SampleGallery.Root isOpen={showGallery} onOpenChangeFn={() => setShowGallery(false)} setIsOpen={setShowGallery}>
         <SampleGallery.Header galleryTitle="Uploads" galleryDescription="Selecione uma das imagens para a análise" />
         <SampleGallery.Grid imgArray={namedBlobs} />
-        <SampleGallery.Footer closeBtnText="Fechar" />
+        <SampleGallery.Footer
+          closeBtnText="Fechar"
+          onConfirmAction={() => handleUpload()}
+        />
       </SampleGallery.Root>
 
       {fileStack.length !== 0 && (
