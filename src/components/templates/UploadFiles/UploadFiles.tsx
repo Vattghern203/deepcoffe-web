@@ -9,6 +9,7 @@ import { RandomGrid } from "@/components/atoms"
 import { Result, SampleGallery } from "@/components/molecules"
 
 import { SelectedImage } from "@/types/ImageTypes"
+import serverRepository from "@/common/repository/ServerRepository"
 
 type IResultData = {
   label: string
@@ -45,13 +46,34 @@ export default function UploadFiles() {
 
     try {
 
-      if (imageContext.selectedImage?.file) {
+      const raw64 = await imageContext.selectedImage?.base64
 
-        const result = await mockLoading(imageContext.selectedImage?.file)
-        setData(result)
+      if (raw64) {
 
+        const image = raw64.replace(/^data:image\/\w+;base64,/, '')
+
+        const res = await serverRepository.post<{
+          cerscospora: number;
+          healthy: number;
+          leafRust: number;
+          miner: number;
+          phoma: number;
+      }, {image: string}>('/classify', {
+          image
+        },
+        false,
+        120000
+        )
+
+        const typedRes = Object.entries(res.data).map(([key, value]) => ({
+          label: key,
+          value
+        }))
+
+        setData(typedRes)
+
+        console.log(typedRes)
       }
-
 
     } catch (error) {
 
