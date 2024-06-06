@@ -49,14 +49,14 @@ export default function RandomGrid({
     <>
       <section className="flex flex-col justify-center items-center mb-10 max-h-[600px] overflow-hidden">
         <div className={`
-          max-h-[600px] relative overflow-clip after:w-full after:h-[50%] after:absolute after:left-[50%] after:translate-x-[-50%] after:bottom-0 after:bg-gradient-to-t after:gradient after:from-card after:to-transparent group ${styles.content_wrapper}`}>
+          max-h-[600px] relative overflow-clip after:w-full after:h-[50%] after:absolute after:left-[50%] after:translate-x-[-50%] after:bottom-0 after:bg-gradient-to-t after:gradient after:from-card after:to-transparent ${styles.content_wrapper}`}>
           <h2 className="text-2xl font-bold mb-2 text-start self-start align-middle flex items-end">
-            Uploaded Images <span className="font-medium text-base ml-1">({uploadCount})</span>
+            Uploaded Images <span className="font-medium text-base ml-1 leading-relaxed">({uploadCount})</span>
           </h2>
 
           <div className="">
             <section
-              className={`${styles.random_grid} py-6 px-4 w-full max-w-3xl overflow-y-auto mx-auto gap-1 rounded-md bg-card border`}
+              className={`${styles.random_grid} w-full max-w-3xl overflow-y-auto mx-auto gap-1 rounded-lg bg-card`}
               style={{ columnCount: cols }}
             >
               {imgArray.map((elem, idx) => idx < maxImageShow && (
