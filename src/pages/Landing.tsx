@@ -6,12 +6,11 @@ export default function Landing() {
     <section className="w-full min-h-[80dvh] flex items-center">
       <div className="container px-4 md:px-6 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
         <div className="space-y-4">
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
-            Unlock Your Potential with Our Platform
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight capitalize">
+            Texto inspirador
           </h1>
           <p className="text-muted-foreground text-lg">
-            Discover how our cutting-edge tools and services can help you achieve your goals and take your business to
-            new heights.
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Illum aliquam assumenda, vitae ducimus ipsa impedit animi! Unde nobis inventore quis possimus suscipit consectetur veritatis dolores ipsa?
           </p>
           <div className="flex gap-4">
             <Link
@@ -35,6 +34,7 @@ export default function Landing() {
             src="public/hero-2-min.jpg"
             width="800"
             height="600"
+            loading="eager"
             alt="Hero Image"
             className="w-full h-full"
           />
