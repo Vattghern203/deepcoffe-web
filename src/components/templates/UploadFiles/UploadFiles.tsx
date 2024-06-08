@@ -58,12 +58,9 @@ export default function UploadFiles() {
           leafRust: number;
           miner: number;
           phoma: number;
-      }, {image: string}>('/classify', {
+        }, { image: string }>('classify', {
           image
-        },
-        false,
-        120000
-        )
+        }, 300000)
 
         const typedRes = Object.entries(res.data).map(([key, value]) => ({
           label: key,
