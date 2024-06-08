@@ -1,5 +1,5 @@
-import { ImageProviderContext } from "@/context/selected-image-provider"
 import { useContext } from "react"
+import { ImageProviderContext } from "@/context/selected-image-provider"
 
 const useImage = () => {
 

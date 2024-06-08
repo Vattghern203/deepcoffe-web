@@ -20,7 +20,7 @@ const ImageThumb = memo(({
   ...rest
 }: ImageThumbProps) => {
   const baseClasses = cn(
-    "image-thumb block mx-auto rounded-md object-cover object-center w-full h-auto",
+    "image-thumb block mx-auto rounded-md object-cover object-center w-full h-full",
     { "aspect-ratio": aspectRatio }
   );
 
