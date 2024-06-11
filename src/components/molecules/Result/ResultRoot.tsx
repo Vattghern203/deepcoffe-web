@@ -1,7 +1,7 @@
-import { Button } from "@/components/ui/button"
-import { Dialog, DialogContent } from "@/components/ui/dialog"
-import { DialogClose } from "@radix-ui/react-dialog"
 import { ReactNode } from "react"
+
+import { Button } from "@/components/ui/button"
+import { Dialog, DialogContent, DialogClose } from "@/components/ui/dialog"
 
 interface ResultRootProps {
 

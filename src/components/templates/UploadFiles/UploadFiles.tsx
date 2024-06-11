@@ -38,8 +38,6 @@ export default function UploadFiles() {
       if (raw64) {
         const image = raw64.replace(/^data:image\/\w+;base64,/, "");
 
-        const image = raw64.replace(/^data:image\/\w+;base64,/, '')
-
         const res = await serverRepository.post<{
           cerscospora: number;
           healthy: number;

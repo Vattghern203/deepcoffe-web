@@ -31,7 +31,7 @@ export default function Landing() {
         </div>
         <div className={`mx-auto rounded-xl overflow-hidden object-cover object-center aspect-[4/3] ${styles.border_image}`}>
           <img
-            src="public/hero-2-min.jpg"
+            src="/hero-2-min.jpg"
             width="800"
             height="600"
             loading="eager"
