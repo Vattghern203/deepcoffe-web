@@ -67,18 +67,9 @@ export class ServerRepository implements IServerRepository {
     return await this.request(url, HttpMethods.GET);
   }
 
-  public async post<R, T>(path: string, payload?: T, auth = true, timeout = 30000): Promise<IServerResponseSuccess<R>> {
+  public async post<R, T>(path: string, payload?: T, timeout = 30000): Promise<IServerResponseSuccess<R>> {
     const url = `${this._serverUrl}/${path}`;
     const data = JSON.stringify(payload);
-
-    this.checkPayloadSize(data);
-    if (auth) {
-      this.setServerHeaders({
-        authorization: `Bearer ${this._jwt}`
-      });
-
-      return await this.request(url, HttpMethods.POST, data, timeout);
-    }
 
     return await this.request(url, HttpMethods.POST, data, timeout);
   }

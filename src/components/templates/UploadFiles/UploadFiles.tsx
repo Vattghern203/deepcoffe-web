@@ -38,10 +38,17 @@ export default function UploadFiles() {
       if (raw64) {
         const image = raw64.replace(/^data:image\/\w+;base64,/, "");
 
-        const res = await serverRepository.post<
-          { cerscospora: number; healthy: number; leafRust: number; miner: number; phoma: number },
-          { image: string }
-        >("/classify", { image }, false, 120000);
+        const image = raw64.replace(/^data:image\/\w+;base64,/, '')
+
+        const res = await serverRepository.post<{
+          cerscospora: number;
+          healthy: number;
+          leafRust: number;
+          miner: number;
+          phoma: number;
+        }, { image: string }>('classify', {
+          image
+        }, 300000)
 
         const typedRes = Object.entries(res.data).map(([key, value]) => ({
           label: key,
