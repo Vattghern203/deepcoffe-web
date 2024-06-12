@@ -5,6 +5,7 @@ import FileIcon from '@/components/atoms/Icons/FileIcon'
 import { Button } from '@/components/ui/button'
 
 import { TemporaryPopUp } from '@/components/atoms'
+import { splitFileExtension } from '@/utils/splitFileExtension';
 
 interface DropzoneProps extends LabelHTMLAttributes<HTMLLabelElement> {
   fileStack: File[];
@@ -16,9 +17,10 @@ interface DropzoneProps extends LabelHTMLAttributes<HTMLLabelElement> {
 
 type UploadError = {
 
-  fileName: string,
-  fileType: string
-  error: string,
+  hasError: boolean,
+  fileName?: string,
+  fileType?: string
+  error?: string,
 }
 
 function Dropzone({
@@ -62,9 +64,10 @@ function Dropzone({
             startTransition(() => {
               setUploadError(
                 {
+                  hasError: true,
                   fileName: file.name,
                   fileType: file.type,
-                  error: `Arquivos ${file.type} não são válidos`,
+                  error: `Arquivos ${splitFileExtension(file.type)} não são válidos`,
                 }
               )
             })
@@ -74,7 +77,7 @@ function Dropzone({
     } else {
 
       [...event.dataTransfer.files].forEach((file, i) => {
-        console.log(`... file[${i}].name = ${file.name.split("/")[1]}`);
+        console.log(`... file[${i}].name = ${file.name}`);
       });
     }
 
@@ -98,9 +101,9 @@ function Dropzone({
   return (
 
     <>
-      {uploadError && (
+      {uploadError?.hasError && (
         <TemporaryPopUp
-          //onDisappear={ startTransition(() => setUploadError(undefined))}
+          onDisappear={() => setUploadError({hasError: false})}
         >
           <p role='alert'>{uploadError?.error}</p>
         </TemporaryPopUp>
