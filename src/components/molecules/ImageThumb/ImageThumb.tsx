@@ -1,17 +1,10 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import process from "process";
-import { ImgHTMLAttributes, Suspense, memo } from "react";
+import { Suspense } from "react";
 import { cn } from "@/lib/utils";
+import { ImageThumbProps } from "@/types/ImageThumbTypes";
 
-interface ImageThumbProps extends ImgHTMLAttributes<HTMLImageElement> {
-  src?: string;
-  altText: string;
-  aspectRatio?: string;
-  placeholder?: string;
-  className?: string;
-}
-
-const ImageThumb = memo(({
+const ImageThumb = ({
   src,
   altText,
   aspectRatio = '10/14',
@@ -29,12 +22,14 @@ const ImageThumb = memo(({
       <img
         src={src || placeholder || process.env.IMAGE_PLACEHOLDER}
         alt={altText}
+        loading="lazy"
+        fetchPriority="low"
         className={cn(baseClasses, className)}
         style={{ aspectRatio }}
         {...rest}
       />
     </Suspense>
   );
-});
+};
 
 export default ImageThumb;

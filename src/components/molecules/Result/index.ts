@@ -1,10 +1,13 @@
+import { lazy } from 'react';
+
 import ResultRoot from './ResultRoot'
 import ResultList from './ResultList'
-import ResultItem from './ResultItem'
 import ResultImageSection from './ResultImageSection'
-import ResultImage from './ResultImage'
 import ResultDataSection from './ResultDataSection'
 import ResultSave from './ResultSave'
+
+const ResultImage = lazy(() => import('./ResultImage'))
+const ResultItem = lazy(() => import('./ResultItem'))
 
 const Result = {
   Root: ResultRoot,

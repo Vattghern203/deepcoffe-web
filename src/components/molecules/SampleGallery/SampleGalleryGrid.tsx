@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useMemo } from "react";
 import classNames from "classnames";
 
 import { ImageThumb } from "@/components/molecules/";
@@ -33,22 +33,27 @@ function SampleGalleryGrid({ imgArray }: SampleGalleryGridProps) {
       });
   }, [imgArray, imageContext]);
 
+  const renderedImages = useMemo(() => {
+
+    return imgArray.map((itemSrc, idx) => (
+      <ImageThumb
+        key={idx}
+        className={classNames('self-stretch hover:cursor-pointer', { outline: selectedImage === idx })}
+        altText={`Sample ${idx}`}
+        tabIndex={0}
+        role="checkbox"
+        aria-checked={selectedImage === idx}
+        src={itemSrc}
+        loading="lazy"
+        onClick={() => handleImageClick(idx)}
+        data-selected={selectedImage === idx}
+      />
+    ))
+  }, [handleImageClick, imgArray, selectedImage])
+
   return (
     <div className={`h-[60dvh] w-full items-start overflow-y-scroll gap-2 p-2 isolate ${styles.grid_dynamic}`}>
-      {imgArray.map((itemSrc, idx) => (
-        <ImageThumb
-          key={idx}
-          className={classNames('self-stretch hover:cursor-pointer', { outline: selectedImage === idx })}
-          altText={`Sample ${idx}`}
-          tabIndex={0}
-          role="checkbox"
-          aria-checked={selectedImage === idx}
-          src={itemSrc}
-          loading="lazy"
-          onClick={() => handleImageClick(idx)}
-          data-selected={selectedImage === idx}
-        />
-      ))}
+      {renderedImages}
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, DragEvent, LabelHTMLAttributes, SetStateAction, startTransition, useRef, useState } from 'react'
+import { ChangeEvent, Dispatch, DragEvent, LabelHTMLAttributes, memo, SetStateAction, startTransition, useRef, useState } from 'react'
 
 import FileIcon from '@/components/atoms/Icons/FileIcon'
 
@@ -90,13 +90,17 @@ function Dropzone({
   }
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = event.target.files?.[0];
-    selectedFile ? setFileStack((prev) => [...prev, selectedFile]) : undefined;
+    const selectedFiles = event.target.files;
 
-    event.target.files = null
+    if (selectedFiles) {
+      const newFiles = Array.from(selectedFiles);
+      setFileStack((prev) => [...prev, ...newFiles]);
+    }
 
-    console.log(event.target.files)
-  }
+    // Reset the selectedFiles variable
+    event.target.files = null;
+    event.target.value = ""
+  };
 
   return (
 
@@ -142,6 +146,7 @@ function Dropzone({
           accept="image/jpeg, image/png"
           required
           disabled={isLoading || fileStack.length > 0}
+          multiple
         />
       </label>
     </>
@@ -149,4 +154,5 @@ function Dropzone({
   )
 }
 
-export default Dropzone;
+const MemoizedDropzone = memo(Dropzone)
+export default MemoizedDropzone;

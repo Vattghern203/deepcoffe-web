@@ -1,3 +1,4 @@
+export { default as Hero } from "./Hero/Hero"
 export { default as LoginCTA } from "./LoginCTA/LoginCTA"
 export { default as RandomGrid } from "./RandomGrid/RandomGrid"
 export { default as ReadMore } from "./ReadMore/ReadMore"
