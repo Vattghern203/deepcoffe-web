@@ -1,4 +1,4 @@
-import { Suspense } from "react";
+import { Suspense, useMemo } from "react";
 
 import { Button } from "@/components/ui/button";
 
@@ -43,6 +43,22 @@ export default function RandomGrid({
     },
   ];
 
+  const memoizedImages = useMemo(() => {
+    return imgArray.map((elem, idx) => idx < maxImageShow && (
+      <Suspense key={`randomgrid/${idx}`} fallback={<ImageSkeleton />}>
+        <img
+          key={`randomgrid/${idx}`}
+          loading="lazy"
+          title={elem}
+          className="rounded-md w-full block object-cover"
+          src={elem}
+          alt={`image for analyses number: ${idx}`}
+          aria-description={`image for analyses number: ${idx}`}
+        />
+      </Suspense>
+    ));
+  }, [imgArray, maxImageShow]);
+
   console.log('Random Grid Rendered', new Date())
 
   return (
@@ -59,17 +75,7 @@ export default function RandomGrid({
               className={`${styles.random_grid} w-full max-w-3xl overflow-y-auto mx-auto gap-1 rounded-lg bg-card`}
               style={{ columnCount: cols }}
             >
-              {imgArray.map((elem, idx) => idx < maxImageShow && (
-                <Suspense key={elem} fallback={<ImageSkeleton />}>
-                  <img
-                    loading="lazy"
-                    title={elem}
-                    className="rounded-md w-full block object-cover"
-                    src={elem}
-                    alt="Sample Image"
-                  />
-                </Suspense>
-              ))}
+              {memoizedImages}
             </section>
           </div>
 

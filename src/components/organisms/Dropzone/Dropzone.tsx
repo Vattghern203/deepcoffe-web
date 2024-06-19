@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, DragEvent, LabelHTMLAttributes, memo, SetStateAction, startTransition, useRef, useState } from 'react'
+import { ChangeEvent, Dispatch, DragEvent, LabelHTMLAttributes, SetStateAction, startTransition, useRef, useState } from 'react'
 
 import FileIcon from '@/components/atoms/Icons/FileIcon'
 
@@ -8,7 +8,7 @@ import { TemporaryPopUp } from '@/components/atoms'
 import { splitFileExtension } from '@/utils/splitFileExtension';
 
 interface DropzoneProps extends LabelHTMLAttributes<HTMLLabelElement> {
-  fileStack: File[];
+  fileStack?: File[];
   setFileStack: Dispatch<SetStateAction<File[]>>
   isLoading: boolean
   isBeingDragged: boolean
@@ -24,7 +24,6 @@ type UploadError = {
 }
 
 function Dropzone({
-  fileStack,
   setFileStack,
   isLoading,
   isBeingDragged,
@@ -143,9 +142,9 @@ function Dropzone({
           type="file"
           ref={imageInputRef}
           onChange={handleChange}
-          accept="image/jpeg, image/png"
+          accept="image/jpeg, image/png, image/jpg"
           required
-          disabled={isLoading || fileStack.length > 0}
+          disabled={isLoading}
           multiple
         />
       </label>
@@ -154,5 +153,4 @@ function Dropzone({
   )
 }
 
-const MemoizedDropzone = memo(Dropzone)
-export default MemoizedDropzone;
+export default Dropzone;
