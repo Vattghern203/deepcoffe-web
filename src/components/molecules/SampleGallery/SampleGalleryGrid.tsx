@@ -41,7 +41,6 @@ function SampleGalleryGrid({ imgArray }: SampleGalleryGridProps) {
         className={classNames('self-stretch hover:cursor-pointer', { outline: selectedImage === idx })}
         altText={`Sample ${idx}`}
         tabIndex={0}
-
         role="checkbox"
         aria-checked={selectedImage === idx}
         src={itemSrc}

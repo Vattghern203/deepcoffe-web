@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Loader } from "lucide-react";
 
 import serverRepository from "@/common/repository/ServerRepository";
@@ -67,7 +67,10 @@ export default function UploadFiles() {
     }
   };
 
-  const createNamedBlob = (file: File) => URL.createObjectURL(file);
+  const createNamedBlob = useCallback((file: File) => {
+    console.log('RENDER NAMED BLOB')
+    return URL.createObjectURL(file)
+  }, []);
 
   const convertBlobToBase64 = async (blob: Blob): Promise<string> => {
     const reader = new FileReader();
@@ -100,9 +103,11 @@ export default function UploadFiles() {
 
   useEffect(() => {
     createImageDataByUpload();
-  }, [fileStack]);
+  });
 
-  const namedBlobs = fileStack.map((file) => createNamedBlob(file));
+  const namedBlobs = useMemo(() => {
+    return fileStack.map((file) => createNamedBlob(file));
+  }, [fileStack, createNamedBlob]);
 
   return (
     <>
