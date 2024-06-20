@@ -1,6 +1,7 @@
+import { useEffect, useState, Suspense } from "react";
+
 import { Progress } from "@/components/ui/progress";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useEffect, useState, Suspense } from "react";
 
 interface ResultItemProps {
   resultLabel: string;

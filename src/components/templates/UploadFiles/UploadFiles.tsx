@@ -1,15 +1,23 @@
+// React Imports
 import { useCallback, useEffect, useMemo, useState } from "react";
+
+// Third-Party Libraries
 import { Loader } from "lucide-react";
 
+// Utilities
 import serverRepository from "@/common/repository/ServerRepository";
 
+// Hooks
 import { useImage } from "@/hooks/useImageContext";
 
+// Internal Components
 import { RandomGrid } from "@/components/atoms";
 import { Result, SampleGallery } from "@/components/molecules";
 import { Dropzone, UploadFilesConfirmation } from "@/components/organisms";
 
+// Types
 import { SelectedImage } from "@/types/ImageTypes";
+
 
 type IResultData = {
   label: string;

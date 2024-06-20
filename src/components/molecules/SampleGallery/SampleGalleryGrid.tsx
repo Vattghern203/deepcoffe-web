@@ -1,13 +1,22 @@
+// React Imports
 import { useState, useCallback, useMemo } from "react";
+
+// Third-Party Libraries
 import classNames from "classnames";
 
+// Internal Components
 import { ImageThumb } from "@/components/molecules/";
 
-import styles from "./sample-gallery.module.css";
+// Hooks
 import { useImage } from "@/hooks/useImageContext";
 
+// Utilities
 import { URLobjToBlob } from "@/utils/URLobjToBlob";
 import { convertBlobToBase64 } from "@/utils/convertBlobToBase64";
+
+// Assets
+import styles from "./sample-gallery.module.css";
+
 
 interface SampleGalleryGridProps {
   imgArray: string[];

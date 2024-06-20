@@ -66,8 +66,10 @@ export default function RandomGrid({
   return (
     <>
       <section className="flex flex-col justify-center items-center mb-10 max-h-[600px] overflow-hidden">
-        <div className={`
-          max-h-[600px] relative overflow-clip after:w-full after:h-[50%] after:absolute after:left-[50%] after:translate-x-[-50%] after:bottom-0 after:bg-gradient-to-t after:gradient after:from-card after:to-transparent ${styles.content_wrapper}`}>
+        
+        <div className={classNames('max-h-[600px] relative overflow-clip after:w-full after:h-[50%] after:absolute after:left-[50%] after:translate-x-[-50%] after:bottom-0 after:bg-gradient-to-t after:gradient after:from-card after:to-transparent',
+          styles.content_wrapper)
+        }>
           <h2 className="text-2xl font-bold mb-2 text-start self-start align-middle flex items-end">
             Uploaded Images
             <span className="font-medium text-base ml-1 leading-relaxed">
