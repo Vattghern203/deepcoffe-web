@@ -54,7 +54,7 @@ export default function UploadFiles() {
         }));
 
         setData(typedRes);
-        renewUpload()
+        //renewUpload()
 
         console.log(typedRes);
       }
@@ -81,9 +81,9 @@ export default function UploadFiles() {
     });
   };
 
-  const renewUpload = () => {
+  /* const renewUpload = () => {
     setData([]);
-  };
+  }; */
 
   const createImageDataByUpload = async () => {
 
@@ -160,7 +160,7 @@ export default function UploadFiles() {
       {data.length !== 0 && (
         <Result.Root onCloseAction={() => setFileStack([])}>
           <Result.ImageSection>
-            <Result.Image imgSrc={namedBlobs[0]} />
+            <Result.Image imgSrc={imageContext.selectedImage?.path} />
           </Result.ImageSection>
           <Result.DataSection>
             <Result.List resultData={data} />

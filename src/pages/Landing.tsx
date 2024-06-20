@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
-import { lazy } from 'react';
+
 import classNames from 'classnames';
 import styles from './pages.module.css';
-const Hero = lazy(() => import("@/components/atoms/Hero/Hero"))
+import {Hero} from "@/components/atoms";
 
 export default function Landing() {
   return (
