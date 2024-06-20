@@ -10,6 +10,8 @@ interface ResultImageProps extends ImgHTMLAttributes<HTMLImageElement> {
 
 export default function ResultImage( { imgSrc, imgAlt, aspect="250/300"}:ResultImageProps ) {
 
+  console.log('this image src', imgSrc?.toString())
+
   return (
 
     <Suspense
@@ -25,7 +27,7 @@ export default function ResultImage( { imgSrc, imgAlt, aspect="250/300"}:ResultI
         alt={imgAlt || "Sample Image"}
         className="rounded-lg"
         height="300"
-        src={imgSrc || "https://cafeutam.com.br/_temas/t_site/imagens/emughczt-LY_UTAM_Banner_CafeAlemBebida_26ago2021.jpg"}
+        src={imgSrc?.toString()}
         style={{
           aspectRatio: aspect,
           objectFit: "cover",

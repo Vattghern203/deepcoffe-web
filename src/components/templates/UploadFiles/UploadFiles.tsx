@@ -26,9 +26,13 @@ export default function UploadFiles() {
   const [isBeingDragged, setIsBeingDragged] = useState(false);
 
   let imageData: SelectedImage[] = [];
+  const alreadyAnalysedImages: SelectedImage[] = []
 
+  // HANDLE UPLOAD
   const handleUpload = async () => {
     console.log("UPLOAD CLICKED");
+
+    if (imageData.length === 1) { imageContext.setSelectedImage(imageData[0]) }
 
     setIsLoading(true);
 
@@ -67,6 +71,7 @@ export default function UploadFiles() {
     }
   };
 
+  // CREATE NAMED BLOBS
   const createNamedBlob = useCallback((file: File) => {
     console.log('RENDER NAMED BLOB')
     return URL.createObjectURL(file)
@@ -101,6 +106,21 @@ export default function UploadFiles() {
     }
   };
 
+  const handleResultClose = () => {
+
+    if (imageContext.selectedImage) {
+
+      // add the selected image to the array
+      alreadyAnalysedImages.push(imageContext.selectedImage)
+
+    setData([]) // Clean the actual data to be empty
+
+    imageData = imageData.filter(
+      item => item.path !== imageContext.selectedImage?.path
+    )
+    }
+  }
+
   useEffect(() => {
     createImageDataByUpload();
   });
@@ -123,7 +143,7 @@ export default function UploadFiles() {
         ) : (
           <section className="flex items-center gap-2 w-full max-w-3xl p-4 border-2 rounded-md mx-auto fade-in-10">
             <Loader className="animate-spin transition-transform will-change-transform" />
-            <article role="alert">
+            <article role="alert" aria-busy="true">
               <h2 className="text-2xl font-bold">Análise em andamento</h2>
               <p className="text-xl">Isso pode demorar um pouco, sinta-se livre para navegar em outras páginas do site.</p>
             </article>
@@ -158,9 +178,9 @@ export default function UploadFiles() {
       )}
 
       {data.length !== 0 && (
-        <Result.Root onCloseAction={() => setFileStack([])}>
+        <Result.Root onCloseAction={() => handleResultClose()}>
           <Result.ImageSection>
-            <Result.Image imgSrc={imageContext.selectedImage?.path} />
+            <Result.Image imgSrc={imageContext.selectedImage?.path} imgAlt="Coffee leaf image" />
           </Result.ImageSection>
           <Result.DataSection>
             <Result.List resultData={data} />

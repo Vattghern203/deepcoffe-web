@@ -96,3 +96,21 @@
     flex: 1
   }
 }
+
+h2:hover .exclude_all {
+  opacity: 1;
+  pointer-events: all;
+
+}
+
+.exclude_all {
+
+  opacity: 0;
+  pointer-events: none;
+
+  transition: opacity ease .8s;
+
+  :hover {
+    text-decoration: underline;
+  }
+}

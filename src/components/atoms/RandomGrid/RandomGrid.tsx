@@ -1,5 +1,7 @@
 import { Suspense, useMemo } from "react";
 
+import classNames from "classnames";
+
 import { Button } from "@/components/ui/button";
 
 import styles from "./random-grid.module.css";
@@ -67,7 +69,16 @@ export default function RandomGrid({
         <div className={`
           max-h-[600px] relative overflow-clip after:w-full after:h-[50%] after:absolute after:left-[50%] after:translate-x-[-50%] after:bottom-0 after:bg-gradient-to-t after:gradient after:from-card after:to-transparent ${styles.content_wrapper}`}>
           <h2 className="text-2xl font-bold mb-2 text-start self-start align-middle flex items-end">
-            Uploaded Images <span className="font-medium text-base ml-1 leading-relaxed">({uploadCount})</span>
+            Uploaded Images
+            <span className="font-medium text-base ml-1 leading-relaxed">
+              ({uploadCount})
+            </span>
+
+            <span role="button" className={classNames('ml-1', styles.exclude_all)}>
+              <small className="lowercase text-sm font-medium transition-all hover:text-destructive">
+                apagar todas
+              </small>
+            </span>
           </h2>
 
           <div className="">
