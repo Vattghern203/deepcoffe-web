@@ -1,0 +1,37 @@
+.analises_loading {
+
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  & ::before {
+
+    content: "";
+    width: 100%;
+    height: 100%;
+    inset: 0;
+
+    position: absolute;
+    inset: 0;
+
+    z-index: -1;
+
+    background-color: hsl(var(--primary));
+
+    filter: blur(0px);
+
+    animation: pulse 4s alternate .2s infinite ease-in-out;
+  }
+}
+
+@keyframes pulse {
+  from {
+
+    filter: blur(initial);
+  }
+
+  to {
+
+    filter: blur(20px);
+  }
+}

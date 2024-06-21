@@ -1,39 +1,21 @@
-import { Progress } from "@radix-ui/react-progress"
+import { Loader } from "lucide-react";
+
+//import classNames from "classnames";
 
 export default function AnalisesLoading() {
 
   return (
-    <article className="flex flex-col items-center space-y-4">
-      <section className="flex items-center space-x-4">
-
-        <h1 className="text-lg font-semibold">Loading database</h1>
-      </section>
-      <section className="w-full max-w-sm space-y-4">
-        <Progress value={50} />
-        <p className="text-sm font-medium tracking-wide">50% Complete</p>
-      </section>
-    </article>
+    <section
+      className="flex items-center gap-2 w-full max-w-3xl p-4 border-2 rounded-md mx-auto fade-in-10 bg-background"
+      aria-busy="true"
+      aria-live="polite"
+      aria-label="Análise em andamento"
+    >
+      <Loader className="animate-spin transition-transform will-change-transform" />
+      <article role="alert">
+        <h2 className="text-2xl font-bold">Análise em andamento</h2>
+        <p className="text-xl">Isso pode demorar um pouco, sinta-se livre para navegar em outras páginas do site.</p>
+      </article>
+    </section>
   )
 }
-
-/* function DatabaseIcon(props: JSX.IntrinsicAttributes) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <ellipse cx="12" cy="5" rx="9" ry="3" />
-      <path d="M3 5V19A9 3 0 0 0 21 19V5" />
-      <path d="M3 12A9 3 0 0 0 21 12" />
-    </svg>
-  )
-} */
-
