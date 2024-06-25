@@ -61,7 +61,7 @@ function SampleGalleryGrid({ imgArray }: SampleGalleryGridProps) {
   }, [handleImageClick, imgArray, selectedImage])
 
   return (
-    <div className={`h-[60dvh] w-full items-start overflow-y-scroll gap-2 p-2 isolate ${styles.grid_dynamic}`}>
+    <div className={classNames('h-[60dvh] w-full items-start overflow-y-scroll gap-2 p-2 isolate',  styles.grid_dynamic)}>
       {renderedImages}
     </div>
   );

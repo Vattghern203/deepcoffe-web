@@ -54,8 +54,8 @@ export default function RandomGrid({
           title={elem}
           className="rounded-md w-full block object-cover"
           src={elem}
-          alt={`image for analyses number: ${idx}`}
-          aria-description={`image for analyses number: ${idx}`}
+          alt={`image for analyses number: ${idx + 1}`}
+          aria-description={`image for analyses number: ${idx + 1}`}
         />
       </Suspense>
     ));
@@ -66,7 +66,7 @@ export default function RandomGrid({
   return (
     <>
       <section className="flex flex-col justify-center items-center mb-10 max-h-[600px] overflow-hidden">
-        
+
         <div className={classNames('max-h-[600px] relative overflow-clip after:w-full after:h-[50%] after:absolute after:left-[50%] after:translate-x-[-50%] after:bottom-0 after:bg-gradient-to-t after:gradient after:from-card after:to-transparent',
           styles.content_wrapper)
         }>
@@ -76,14 +76,17 @@ export default function RandomGrid({
               ({uploadCount})
             </span>
 
-            <span role="button" className={classNames('ml-1', styles.exclude_all)}>
+            <span
+              role="button"
+              className={classNames('ml-1', styles.exclude_all)}
+            >
               <small className="lowercase text-sm font-medium transition-all hover:text-destructive">
                 apagar todas
               </small>
             </span>
           </h2>
 
-          <div className="">
+          <div>
             <section
               className={`${styles.random_grid} w-full max-w-3xl overflow-y-auto mx-auto gap-1 rounded-lg bg-card`}
               style={{ columnCount: cols }}
