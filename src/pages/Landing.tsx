@@ -2,13 +2,17 @@ import { Link } from 'react-router-dom';
 
 import classNames from 'classnames';
 import styles from './pages.module.css';
-import {Hero} from "@/components/atoms";
+import { Hero } from "@/components/atoms";
+//import Blob from '@/components/atoms/Blob/Blob';
 
 export default function Landing() {
   return (
     <section className="w-full min-h-[80dvh] flex items-center">
+
+
+
       <div className="container px-4 md:px-6 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-        <div className="space-y-4">
+        <div className="space-y-4 animated-fade__reverse">
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight capitalize">
             Texto inspirador
           </h1>
@@ -34,8 +38,8 @@ export default function Landing() {
         </div>
         <div
           className={classNames(
-            'mx-auto rounded-xl overflow-hidden object-cover object-center aspect-[4/3]',
-            styles.border_image
+            'mx-auto rounded-xl overflow-hidden object-cover object-center aspect-[4/3] animated-fade__reverse',
+            styles.border_image,
           )}
         >
           <Hero />

@@ -63,4 +63,4 @@ function ThemeProvider({
   )
 }
 
-export { ThemeProviderContext, ThemeProvider}
+export { ThemeProviderContext, ThemeProvider }

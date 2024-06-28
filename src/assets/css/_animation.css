@@ -24,18 +24,132 @@
 /* Basic comment */
 
 
-@keyframes fade {
-  0% {
-    opacity: initial;
-  }
-
-  100% {
-    opacity: 0;
-  }
-}
 
 @media (prefers-reduced-motion: no-preference) {
+  :root {
 
+    --animation-timing: 2s;
+    --inital-scale: 80%;
+  }
+
+
+  @keyframes fade {
+    0% {
+      opacity: initial;
+    }
+
+    100% {
+      opacity: 0;
+    }
+  }
+
+
+
+  @keyframes expand {
+    from {
+
+      transform: scale(var(--inital-scale));
+      opacity: 0;
+    }
+
+    to {
+
+      transform: scale(initial);
+      opacity: initial;
+    }
+  }
+
+  @keyframes get-in {
+
+    from {
+
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+
+    to {
+
+      transform: translateX(initial);
+      opacity: initial;
+    }
+  }
+
+  @keyframes get-down {
+
+    from {
+
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+
+    to {
+
+      transform: translateY(initial);
+      opacity: initial;
+    }
+  }
+
+
+  @keyframes moveAndMorph {
+    0% {
+        d: path("M220,429.9920050298365C304.694737741514,427.43637679247394,364.32184596434075,355.98555568300185,390.0693970594557,275.25889683107187C415.3048830492086,196.1377229014876,406.0789245002333,105.1670799119068,339.38607568051503,55.67916387733586C270.89008033659536,4.853263855472328,177.6544515881246,16.61309972971496,108.17414942085335,66.0849210215516C36.328699467743164,117.2407903808263,-10.79781441938939,202.2669643588958,15.108836193696874,286.5731747047506C42.181780154746626,374.6747723350086,127.87449732956945,432.77185348658867,220,429.9920050298365");
+        transform: translate(0, 0);
+    }
+    50% {
+        d: path("M220,429.9920050298365C298,400,350,300,390,200C410,130,380,50,320,20C260,-10,150,30,100,90C50,150,-10,230,40,300C90,370,150,450,220,429.9920050298365");
+        transform: translate(50px, 50px);
+    }
+    100% {
+        d: path("M220,429.9920050298365C304.694737741514,427.43637679247394,364.32184596434075,355.98555568300185,390.0693970594557,275.25889683107187C415.3048830492086,196.1377229014876,406.0789245002333,105.1670799119068,339.38607568051503,55.67916387733586C270.89008033659536,4.853263855472328,177.6544515881246,16.61309972971496,108.17414942085335,66.0849210215516C36.328699467743164,117.2407903808263,-10.79781441938939,202.2669643588958,15.108836193696874,286.5731747047506C42.181780154746626,374.6747723350086,127.87449732956945,432.77185348658867,220,429.9920050298365");
+        transform: translate(0, 0);
+    }
+}
+  /*
+  FADE
+  */
+
+
+  .animated-fade {
+
+    animation: fade var(--animation-timing) 1 forwards ease;
+  }
+
+  .animated-fade__reverse {
+
+    animation: fade var(--animation-timing) 1 reverse ease;
+  }
+
+  /*
+  TRANSFORM
+  */
+
+  .animated-get-in {
+
+    animation: get-in var(--animation-timing) forwards ease;
+  }
+
+  .animated-get-down {
+
+    --animation-timing: .8s;
+
+    animation: get-down var(--animation-timing) 1 forwards ease;
+    transition: transform .8s ease;
+  }
+
+  .animated-expand-in {
+
+    --animation-timing: .8s;
+    --inital-scale: 90%;
+
+    animation: expand var(--animation-timing) 1 forwards ease;
+  }
+
+  #blob {
+
+    animation: moveAndMorph var(--animation-timing) infinite alternate ease;
+
+    fill: var(--accent);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

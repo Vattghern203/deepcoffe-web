@@ -2,7 +2,7 @@ function Footer() {
   return (
     <footer className="w-full mt-[25%] h-fit py-32 px-6 grid grid-cols-3 grid-rows-3 place-content-center self-end text-center gap-4 border-t-2 border-t-border">
 
-      <section className="col-span-3">
+      <address className="col-span-3">
         <ul className="flex flex-col flex-wrap max-h-24">
           <li>
             <a href="#">
@@ -31,7 +31,7 @@ function Footer() {
           </li>
 
         </ul>
-      </section>
+      </address>
 
       <section className="row-start-2 col-span-3">
         <p className="text-sm">

@@ -3,7 +3,7 @@ import { XIcon } from 'lucide-react'
 
 import { AlertDescription, AlertTitle } from '@/components/ui/alert'
 
-import { IconButton } from '@/components/molecules/'
+import { IconButton, MyAnalises } from '@/components/molecules/'
 import { Article } from '@/components/organisms/'
 import { NewsContainer } from '@/components/templates/'
 
@@ -13,6 +13,9 @@ export default function News() {
 
     return (
       <Suspense fallback={<div>Loading...</div>}>
+
+        <MyAnalises />
+
         <NewsContainer heading='Lorem Ipsum'>
           <Article.Root>
 
