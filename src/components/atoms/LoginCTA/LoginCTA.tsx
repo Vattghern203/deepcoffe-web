@@ -6,7 +6,7 @@ interface LoginCTAProps {
   label?: string
 }
 
-function LoginCTA( { label='Login' }:LoginCTAProps ) {
+function LoginCTA({ label = 'Login' }: LoginCTAProps) {
 
   return (
 
