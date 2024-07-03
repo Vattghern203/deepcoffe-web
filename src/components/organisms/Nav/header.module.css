@@ -1,3 +1,26 @@
 .header {
+  margin: 0 auto;
+  align-self: center;
   backdrop-filter: blur(.4rem);
+  animation: mutate 1ms ease;
+  animation-timeline: scroll();
+  animation-fill-mode: forwards;
+  animation-range: cover 25% cover 50%;
+  transition: width 2s ease, border-radius 4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+@keyframes mutate {
+  from {
+
+    background-color: initial;
+    width: 100%;
+    border-radius: 0;
+  }
+
+  to {
+
+    background-color: hsl(var(--border));
+    width: 60dvw;
+    border-radius: var(--radius);
+  }
 }

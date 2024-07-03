@@ -18,6 +18,7 @@ function LoginCTA({ label = 'Login' }: LoginCTAProps) {
           hover:bg-gray-100/60 focus:outline-none focus:ring-1 focus:ring-gray-100/50 dark:hover:bg-gray-800/60 dark:focus:ring-gray-800/50 transition-colors
           bg-primary"
         to="#"
+        aria-label={label}
       >
         {label}
       </Link>

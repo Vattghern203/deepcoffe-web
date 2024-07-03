@@ -1,16 +1,11 @@
 import { Link } from 'react-router-dom';
-
 import classNames from 'classnames';
 import styles from './pages.module.css';
 import { Hero } from "@/components/atoms";
-//import Blob from '@/components/atoms/Blob/Blob';
 
 export default function Landing() {
   return (
-    <section className="w-full min-h-[80dvh] flex items-center">
-
-
-
+    <section className="w-full min-h-[80dvh] flex items-center" aria-label="Landing page">
       <div className="container px-4 md:px-6 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
         <div className="space-y-4 animated-fade__reverse">
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight capitalize">
@@ -24,6 +19,7 @@ export default function Landing() {
               to="/home"
               className='inline-flex h-10 items-center justify-center rounded-md bg-primary px-6 text-sm font-medium shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none text-popover disabled:opacity-50'
               referrerPolicy="no-referrer-when-downgrade"
+              aria-label="Get Started"
             >
               Get Started
             </Link>
@@ -31,6 +27,7 @@ export default function Landing() {
               to="/about"
               className='inline-flex h-10 px-6 items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50'
               referrerPolicy="no-referrer-when-downgrade"
+              aria-label="Learn More"
             >
               Learn More
             </Link>
@@ -41,6 +38,7 @@ export default function Landing() {
             'mx-auto rounded-xl overflow-hidden object-cover object-center aspect-[4/3] animated-fade__reverse',
             styles.border_image,
           )}
+          aria-label="Landing page hero image"
         >
           <Hero />
         </div>
